@@ -20,11 +20,11 @@ library BitMapUtils {
     }
 
     function unset(uint256 bitmap, uint256 index) internal pure returns (uint256) {
-        return bitmap & toggle(0xFF, index);
+        return bitmap & toggle(type(uint256).max, index);
     }
     
     function unsetRange(uint256 bitmap, uint256 offset, uint256 amount) internal pure returns (uint256) {
-        return bitmap & toggleRange(0xFF, offset, amount);
+        return bitmap & toggleRange(type(uint256).max, offset, amount);
     }
 
     function toggle(uint256 bitmap, uint256 index) internal pure returns (uint256) {
