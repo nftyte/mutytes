@@ -3,9 +3,8 @@ pragma solidity ^0.8.0;
 
 import { IERC721 } from "./IERC721.sol";
 import { ERC721Internal } from "./ERC721Internal.sol";
-import { ERC165 } from "../../introspection/ERC165.sol";
 
-abstract contract ERC721 is ERC721Internal, IERC721, ERC165 {
+abstract contract ERC721 is ERC721Internal, IERC721 {
     function balanceOf(address owner)
         external
         view
