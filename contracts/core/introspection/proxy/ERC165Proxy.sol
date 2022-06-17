@@ -5,7 +5,7 @@ import { IERC165 } from "../IERC165.sol";
 import { UpgradableProxy } from "../../proxy/upgradable/UpgradableProxy.sol";
 import { erc165Storage as es, ERC165Storage } from "../ERC165Storage.sol";
 
-abstract contract ERC165Upgradable is IERC165, UpgradableProxy {
+abstract contract ERC165Proxy is IERC165, UpgradableProxy {
     function supportsInterface(bytes4 interfaceId)
         external
         virtual

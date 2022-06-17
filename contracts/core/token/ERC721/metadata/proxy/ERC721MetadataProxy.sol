@@ -5,7 +5,7 @@ import { IERC721Metadata } from "../IERC721Metadata.sol";
 import { UpgradableProxy } from "../../../../proxy/upgradable/UpgradableProxy.sol";
 import { erc721MetadataStorage as es } from "../ERC721MetadataStorage.sol";
 
-abstract contract ERC721MetadataUpgradable is IERC721Metadata, UpgradableProxy {
+abstract contract ERC721MetadataProxy is IERC721Metadata, UpgradableProxy {
     function name() external virtual override upgradable returns (string memory) {
         return es().name;
     }
