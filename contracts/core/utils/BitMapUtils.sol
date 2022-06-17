@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 
 library BitMapUtils {
     function get(uint256 bitmap, uint256 index) internal pure returns (uint256) {
-        return bitmap >> index & 1;
+        return (bitmap >> index) & 1;
     }
 
     function isSet(uint256 bitmap, uint256 index) internal pure returns (bool) {

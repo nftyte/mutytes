@@ -32,9 +32,9 @@ library ERC721InventoryUtils {
     }
 
     function mint(uint256 inventory, uint256 amount) internal pure returns (uint256) {
-        uint256 index = minted(inventory);
-        require(amount + index < MAX_MINTED_PER_INVENTORY + 1, "ERC721Utils: mint amount overflow");
+        uint256 offset = minted(inventory);
+        require(amount + offset < MAX_MINTED_PER_INVENTORY + 1, "ERC721Utils: mint amount overflow");
         
-        return inventory.setRange(BITMAP_OFFSET + index, amount) + (amount << BALANCE_BITSIZE) + amount;
+        return inventory.setRange(BITMAP_OFFSET + offset, amount) + (amount << BALANCE_BITSIZE) + amount;
     }
 }
