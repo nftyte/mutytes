@@ -2,7 +2,7 @@
 
 pragma solidity ^0.8.0;
 
-abstract contract ProxyBase {
+abstract contract ProxyInternal {
     function _implementation() internal view virtual returns (address);
 
     function _delegate(address implementation) internal virtual {

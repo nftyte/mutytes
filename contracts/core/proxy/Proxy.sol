@@ -2,9 +2,9 @@
 
 pragma solidity ^0.8.0;
 
-import { ProxyBase } from "./base/ProxyBase.sol";
+import { ProxyInternal } from "./ProxyInternal.sol";
 
-abstract contract Proxy is ProxyBase {
+abstract contract Proxy is ProxyInternal {
     function _fallback() internal virtual {
         _delegate(_implementation());
     }
