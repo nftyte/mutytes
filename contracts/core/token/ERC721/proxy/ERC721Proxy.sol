@@ -2,10 +2,11 @@
 pragma solidity ^0.8.0;
 
 import { IERC721 } from "../IERC721.sol";
+import { ERC721Internal } from "../ERC721Internal.sol";
 import { UpgradableProxy } from "../../../proxy/upgradable/UpgradableProxy.sol";
 import { erc721Storage as es, ERC721Storage } from "../ERC721Storage.sol";
 
-abstract contract ERC721Proxy is IERC721, UpgradableProxy {
+abstract contract ERC721Proxy is ERC721Internal, IERC721, UpgradableProxy {
     function balanceOf(address owner)
         external
         virtual
@@ -13,7 +14,7 @@ abstract contract ERC721Proxy is IERC721, UpgradableProxy {
         upgradable
         returns (uint256)
     {
-        return es().balanceOf(owner);
+        return _balanceOf(owner);
     }
 
     function ownerOf(uint256 tokenId)
@@ -21,14 +22,9 @@ abstract contract ERC721Proxy is IERC721, UpgradableProxy {
         virtual
         override
         upgradable
-        returns (address owner)
+        returns (address)
     {
-        owner = es().ownerOf(tokenId);
-        
-        require(
-            owner != address(0),
-            "ERC721Proxy: owner query for nonexistent token"
-        );
+        return _ownerOf(tokenId);
     }
     
     function safeTransferFrom(
@@ -36,9 +32,7 @@ abstract contract ERC721Proxy is IERC721, UpgradableProxy {
         address to,
         uint256 tokenId
     ) external virtual override upgradable {
-        ERC721Storage storage erc721 = es();
-        erc721.enforceIsApprovedOrOwner(msg.sender, tokenId);
-        erc721.safeTransfer(from, to, tokenId, "");
+        _safeTransferFrom(from, to, tokenId);
     }
 
     function safeTransferFrom(
@@ -47,9 +41,7 @@ abstract contract ERC721Proxy is IERC721, UpgradableProxy {
         uint256 tokenId,
         bytes memory data
     ) external virtual override upgradable {
-        ERC721Storage storage erc721 = es();
-        erc721.enforceIsApprovedOrOwner(msg.sender, tokenId);
-        erc721.safeTransfer(from, to, tokenId, data);
+        _safeTransferFrom(from, to, tokenId, data);
     }
 
     function transferFrom(
@@ -57,9 +49,7 @@ abstract contract ERC721Proxy is IERC721, UpgradableProxy {
         address to,
         uint256 tokenId
     ) external virtual override upgradable {
-        ERC721Storage storage erc721 = es();
-        erc721.enforceIsApprovedOrOwner(msg.sender, tokenId);
-        erc721.transfer(from, to, tokenId);
+        _transferFrom(from, to, tokenId);
     }
 
     function approve(address to, uint256 tokenId)
@@ -68,17 +58,7 @@ abstract contract ERC721Proxy is IERC721, UpgradableProxy {
         override
         upgradable
     {
-        ERC721Storage storage erc721 = es();
-        address owner = erc721.ownerOf(tokenId);
-        require(to != owner, "ERC721Proxy: approval to current owner");
-
-        // TODO consider lib for msg.sender
-        require(
-            msg.sender == owner || erc721.isApprovedForAll(owner, msg.sender),
-            "ERC721Proxy: approve caller is not owner nor approved for all"
-        );
-
-        erc721.approve(to, tokenId);
+        _approve(to, tokenId);
     }
     
     function getApproved(uint256 tokenId)
@@ -88,14 +68,7 @@ abstract contract ERC721Proxy is IERC721, UpgradableProxy {
         upgradable
         returns (address)
     {
-        ERC721Storage storage erc721 = es();
-
-        require(
-            erc721.exists(tokenId),
-            "ERC721Proxy: approved query for nonexistent token"
-        );
-
-        return erc721.getApproved(tokenId);
+        return _getApproved(tokenId);
     }
     
     function setApprovalForAll(address operator, bool approved)
@@ -104,7 +77,7 @@ abstract contract ERC721Proxy is IERC721, UpgradableProxy {
         override
         upgradable
     {
-        es().setApprovalForAll(msg.sender, operator, approved);
+        _setApprovalForAll(operator, approved);
     }
 
     function isApprovedForAll(address owner, address operator)
@@ -114,6 +87,6 @@ abstract contract ERC721Proxy is IERC721, UpgradableProxy {
         upgradable
         returns (bool)
     {
-        return es().isApprovedForAll(owner, operator);
+        return _isApprovedForAll(owner, operator);
     }
 }
