@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import { IERC721MetadataUpgradable as IERC721Metadata } from "./IERC721MetadataUpgradable.sol";
+import { IERC721Metadata } from "../IERC721Metadata.sol";
 import { UpgradableProxy } from "../../../../proxy/upgradable/UpgradableProxy.sol";
 import { erc721MetadataStorage as es, ERC721MetadataStorage } from "../ERC721MetadataStorage.sol";
 

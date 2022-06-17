@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import { IERC165Upgradable as IERC165 } from "./IERC165Upgradable.sol";
+import { IERC165 } from "../IERC165.sol";
 import { UpgradableProxy } from "../../proxy/upgradable/UpgradableProxy.sol";
 import { erc165Storage as es, ERC165Storage } from "../ERC165Storage.sol";
 

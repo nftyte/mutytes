@@ -1,11 +1,16 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import { IERC721Upgradable as IERC721 } from "./IERC721Upgradable.sol";
+import { IERC721 } from "../IERC721.sol";
 import { UpgradableProxy } from "../../../proxy/upgradable/UpgradableProxy.sol";
 import { erc721Storage as es, ERC721Storage } from "../ERC721Storage.sol";
 
 abstract contract ERC721Upgradable is IERC721, UpgradableProxy {
+    constructor(uint256 supply) {
+        ERC721Storage storage erc721 = es();
+        erc721.maxSupply = erc721.supply = supply;
+    }
+
     function balanceOf(address owner)
         external
         virtual
