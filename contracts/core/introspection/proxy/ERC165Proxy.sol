@@ -2,10 +2,10 @@
 pragma solidity ^0.8.0;
 
 import { IERC165 } from "../IERC165.sol";
+import { ERC165Internal } from "../ERC165Internal.sol";
 import { UpgradableProxy } from "../../proxy/upgradable/UpgradableProxy.sol";
-import { erc165Storage as es, ERC165Storage } from "../ERC165Storage.sol";
 
-abstract contract ERC165Proxy is IERC165, UpgradableProxy {
+abstract contract ERC165Proxy is ERC165Internal, IERC165, UpgradableProxy {
     function supportsInterface(bytes4 interfaceId)
         external
         virtual
@@ -13,6 +13,6 @@ abstract contract ERC165Proxy is IERC165, UpgradableProxy {
         upgradable
         returns (bool)
     {
-        return es().supportsInterface(interfaceId);
+        return _supportsInterface(interfaceId);
     }
 }
