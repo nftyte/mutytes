@@ -1,0 +1,5 @@
+artifacts
+cache
+node_modules
+contracts_old*
+package-lock.json
