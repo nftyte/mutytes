@@ -27,9 +27,7 @@ abstract contract ERC721Internal {
         address to,
         uint256 tokenId
     ) internal virtual {
-        ERC721Storage storage erc721 = es();
-        erc721.enforceIsApprovedOrOwner(msg.sender, tokenId);
-        erc721.safeTransfer(from, to, tokenId, "");
+        _safeTransferFrom(from, to, tokenId, "");
     }
 
     function _safeTransferFrom(
