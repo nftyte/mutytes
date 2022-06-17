@@ -27,7 +27,7 @@ abstract contract ERC721Upgradable is IERC721, UpgradableProxy {
         
         require(
             owner != address(0),
-            "ERC721: owner query for nonexistent token"
+            "ERC721Upgradable: owner query for nonexistent token"
         );
     }
     
@@ -70,12 +70,12 @@ abstract contract ERC721Upgradable is IERC721, UpgradableProxy {
     {
         ERC721Storage storage erc721 = es();
         address owner = erc721.ownerOf(tokenId);
-        require(to != owner, "ERC721: approval to current owner");
+        require(to != owner, "ERC721Upgradable: approval to current owner");
 
         // TODO consider lib for msg.sender
         require(
             msg.sender == owner || erc721.isApprovedForAll(owner, msg.sender),
-            "ERC721: approve caller is not owner nor approved for all"
+            "ERC721Upgradable: approve caller is not owner nor approved for all"
         );
 
         erc721.approve(to, tokenId);
@@ -92,7 +92,7 @@ abstract contract ERC721Upgradable is IERC721, UpgradableProxy {
 
         require(
             erc721.exists(tokenId),
-            "ERC721: approved query for nonexistent token"
+            "ERC721Upgradable: approved query for nonexistent token"
         );
 
         return erc721.getApproved(tokenId);
