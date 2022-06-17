@@ -17,4 +17,14 @@ abstract contract ERC721MetadataProxy is
     function symbol() external virtual override upgradable returns (string memory) {
         return _symbol();
     }
+
+    function tokenURI(uint256 tokenId)
+        external
+        virtual
+        override
+        upgradable
+        returns (string memory)
+    {
+        return _tokenURI(tokenId);
+    }
 }

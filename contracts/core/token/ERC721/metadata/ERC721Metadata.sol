@@ -18,5 +18,8 @@ abstract contract ERC721Metadata is ERC721MetadataInternal, IERC721Metadata {
         view
         virtual
         override
-        returns (string memory);
+        returns (string memory)
+    {
+        return _tokenURI(tokenId);
+    }
 }

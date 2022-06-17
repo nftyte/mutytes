@@ -11,4 +11,6 @@ abstract contract ERC721MetadataInternal {
     function _symbol() internal view virtual returns (string memory) {
         return es().symbol;
     }
+
+    function _tokenURI(uint256 tokenId) internal view virtual returns (string memory);
 }
