@@ -80,7 +80,7 @@ library ERC721Utils {
         // Clear approvals from the previous owner
         approve(es, address(0), tokenId);
 
-        es.inventories[from] = es.inventories[from].remove(tokenId.index());
+        removeTokenFromInventory(es, from, tokenId);
         es.owners[tokenId] = to;
 
         unchecked {
@@ -157,13 +157,26 @@ library ERC721Utils {
             delete es.owners[tokenId];
         }
 
-        es.inventories[owner] = es.inventories[owner].remove(tokenId.index());
+        removeTokenFromInventory(es, owner, tokenId);
 
         unchecked {
             es.burned++;
         }
 
         emit Transfer(owner, address(0), tokenId);
+    }
+
+    function removeTokenFromInventory(
+        ERC721Storage storage es,
+        address from,
+        uint256 tokenId
+    ) internal {
+        uint256 inventory = es.inventories[from];
+        if (es.owners[tokenId] == from) {
+           es.inventories[from] = inventory - 1;
+        } else {
+            es.inventories[from] = inventory.remove(tokenId.index());
+        }
     }
 
     event Approval(address indexed owner, address indexed approved, uint256 indexed tokenId);
