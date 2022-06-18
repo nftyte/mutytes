@@ -6,8 +6,8 @@ import { ERC721MetadataInternal } from "../ERC721MetadataInternal.sol";
 import { UpgradableProxy } from "../../../../proxy/upgradable/UpgradableProxy.sol";
 
 abstract contract ERC721MetadataProxy is
-    ERC721MetadataInternal,
     IERC721Metadata,
+    ERC721MetadataInternal,
     UpgradableProxy
 {
     function name() external virtual override upgradable returns (string memory) {

@@ -5,7 +5,7 @@ import { IERC721 } from "../IERC721.sol";
 import { ERC721Internal } from "../ERC721Internal.sol";
 import { UpgradableProxy } from "../../../proxy/upgradable/UpgradableProxy.sol";
 
-abstract contract ERC721Proxy is ERC721Internal, IERC721, UpgradableProxy {
+abstract contract ERC721Proxy is IERC721, ERC721Internal, UpgradableProxy {
     function balanceOf(address owner)
         external
         virtual

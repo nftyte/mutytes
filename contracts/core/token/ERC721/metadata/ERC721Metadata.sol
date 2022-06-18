@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 import { IERC721Metadata } from "./IERC721Metadata.sol";
 import { ERC721MetadataInternal } from "./ERC721MetadataInternal.sol";
 
-abstract contract ERC721Metadata is ERC721MetadataInternal, IERC721Metadata {
+abstract contract ERC721Metadata is IERC721Metadata, ERC721MetadataInternal {
     function name() external view virtual override returns (string memory) {
         return _name();
     }
