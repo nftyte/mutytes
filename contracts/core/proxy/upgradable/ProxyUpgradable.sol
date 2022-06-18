@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 
 import { ProxyInternal } from "../ProxyInternal.sol";
 
-abstract contract UpgradableProxy is ProxyInternal {
+abstract contract ProxyUpgradable is ProxyInternal {
     modifier upgradable() {
         address implementation = _implementation();
         

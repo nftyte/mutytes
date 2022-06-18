@@ -3,12 +3,12 @@ pragma solidity ^0.8.0;
 
 import { IERC721Metadata } from "../IERC721Metadata.sol";
 import { ERC721MetadataInternal } from "../ERC721MetadataInternal.sol";
-import { UpgradableProxy } from "../../../../proxy/upgradable/UpgradableProxy.sol";
+import { ProxyUpgradable } from "../../../../proxy/upgradable/ProxyUpgradable.sol";
 
 abstract contract ERC721MetadataProxy is
     IERC721Metadata,
     ERC721MetadataInternal,
-    UpgradableProxy
+    ProxyUpgradable
 {
     function name() external virtual override upgradable returns (string memory) {
         return _name();
