@@ -5,6 +5,11 @@ import { IERC173Controller } from "../IERC173Controller.sol";
 import { OwnableModel } from "./OwnableModel.sol";
 
 abstract contract OwnableController is IERC173Controller, OwnableModel {
+    modifier onlyOwner() {
+        _enforceOnlyOwner();
+        _;
+    }
+
     function owner_() internal view virtual returns (address) {
         return _owner();
     }
