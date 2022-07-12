@@ -26,11 +26,11 @@ abstract contract DiamondWritableController is
             FacetCut memory facetCut = facetCuts[i];
 
             if (facetCut.action == FacetCutAction.Add) {
-                addFunctions_(facetCut.selectors, facetCut.facetAddress, false);
+                addFunctions_(facetCut.functionSelectors, facetCut.facetAddress, false);
             } else if (facetCut.action == FacetCutAction.Replace) {
-                replaceFunctions_(facetCut.selectors, facetCut.facetAddress);
+                replaceFunctions_(facetCut.functionSelectors, facetCut.facetAddress);
             } else if (facetCut.action == FacetCutAction.Remove) {
-                removeFunctions_(facetCut.selectors);
+                removeFunctions_(facetCut.functionSelectors);
             } else {
                 revert UnexpectedFacetCutAction(facetCut.action);
             }

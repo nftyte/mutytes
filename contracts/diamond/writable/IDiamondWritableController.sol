@@ -11,7 +11,7 @@ interface IDiamondWritableController {
     struct FacetCut {
         address facetAddress;
         FacetCutAction action;
-        bytes4[] selectors;
+        bytes4[] functionSelectors;
     }
 
     error UnexpectedFacetCutAction(FacetCutAction action);
