@@ -40,12 +40,12 @@ abstract contract DiamondReadableModel {
         returns (bytes4[] memory selectors)
     {
         ProxyFacetedStorage storage ps = proxyFacetedStorage();
-        uint256 selectorCount = ps.implementationInfo[facet].selectorCount;
-        selectors = new bytes4[](selectorCount);
+        uint256 count = ps.implementationInfo[facet].selectorCount;
+        selectors = new bytes4[](count);
         uint256 index;
 
         unchecked {
-            for (uint256 i; index < selectorCount; i++) {
+            for (uint256 i; index < count; i++) {
                 bytes4 selector = ps.selectors[i];
 
                 if (ps.selectorInfo[selector].implementation == facet) {
