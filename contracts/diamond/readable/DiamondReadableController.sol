@@ -3,16 +3,11 @@ pragma solidity ^0.8.0;
 
 import { IDiamondReadableController } from "./IDiamondReadableController.sol";
 import { ProxyFacetedModel } from "../../core/proxy/faceted/ProxyFacetedModel.sol";
-import { AddressUtils } from "../../core/utils/AddressUtils.sol";
-import { IntegerUtils } from "../../core/utils/IntegerUtils.sol";
 
 abstract contract DiamondReadableController is
     IDiamondReadableController,
     ProxyFacetedModel
 {
-    using AddressUtils for address;
-    using IntegerUtils for uint256;
-
     function facets_() internal view virtual returns (Facet[] memory facets) {
         address[] memory facetAddresses = _implementations();
         bytes4[][] memory facetFunctions = _functionsByImplementation();
