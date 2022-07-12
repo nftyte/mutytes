@@ -1,15 +1,13 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import { ISafeOwnableController } from "./ISafeOwnableController.sol";
 import { SafeOwnableModel } from "./SafeOwnableModel.sol";
 import { OwnableController } from "../OwnableController.sol";
+import { AddressUtils } from "../../../utils/AddressUtils.sol";
 
-abstract contract SafeOwnableController is
-    ISafeOwnableController,
-    SafeOwnableModel,
-    OwnableController
-{
+abstract contract SafeOwnableController is SafeOwnableModel, OwnableController {
+    using AddressUtils for address;
+
     function nomineeOwner_() internal view virtual returns (address) {
         return _nomineeOwner();
     }
@@ -26,10 +24,6 @@ abstract contract SafeOwnableController is
     }
 
     function _enforceOnlyNomineeOwner() internal view virtual {
-        if (msg.sender == _nomineeOwner()) {
-            return;
-        }
-
-        revert ForbiddenOnlyNomineeOwner();
+        msg.sender.enforceEquals(_nomineeOwner());
     }
 }
