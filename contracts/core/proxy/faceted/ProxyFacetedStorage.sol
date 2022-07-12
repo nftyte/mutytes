@@ -3,6 +3,11 @@ pragma solidity ^0.8.0;
 
 bytes32 constant FACETED_PROXY_STORAGE_SLOT = keccak256("core.proxy.faceted.storage");
 
+struct ImplementationInfo {
+    uint16 position;
+    uint16 selectorCount;
+}
+
 struct SelectorInfo {
     bool isUpgradable;
     uint16 position;
@@ -12,6 +17,8 @@ struct SelectorInfo {
 struct ProxyFacetedStorage {
     mapping(bytes4 => SelectorInfo) selectorInfo;
     bytes4[] selectors;
+    mapping(address => ImplementationInfo) implementationInfo;
+    address[] implementations;
 }
 
 function proxyFacetedStorage() pure returns (ProxyFacetedStorage storage ps) {

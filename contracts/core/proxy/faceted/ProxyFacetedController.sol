@@ -9,18 +9,18 @@ abstract contract ProxyFacetedController is ProxyFacetedModel, ProxyModel {
     using AddressUtils for address;
 
     function addFunction_(
-        address implementation,
         bytes4 selector,
+        address implementation,
         bool isUpgradable
     ) internal virtual {
         _enforceCanAddFunctions(implementation);
         _enforceCanAddFunction(selector, implementation);
-        _addFunction(selector, implementation, isUpgradable);
+        _addFunction_(selector, implementation, isUpgradable);
     }
 
     function addFunctions_(
-        address implementation,
         bytes4[] memory selectors,
+        address implementation,
         bool isUpgradable
     ) internal virtual {
         _enforceCanAddFunctions(implementation);
@@ -29,18 +29,18 @@ abstract contract ProxyFacetedController is ProxyFacetedModel, ProxyModel {
             for (uint256 i; i < selectors.length; i++) {
                 bytes4 selector = selectors[i];
                 _enforceCanAddFunction(selector, implementation);
-                _addFunction(selector, implementation, isUpgradable);
+                _addFunction_(selector, implementation, isUpgradable);
             }
         }
     }
 
-    function replaceFunction_(address implementation, bytes4 selector) internal virtual {
+    function replaceFunction_(bytes4 selector, address implementation) internal virtual {
         _enforceCanAddFunctions(implementation);
         _enforceCanReplaceFunction(selector, implementation);
-        _setImplementation(selector, implementation);
+        _replaceFunction_(selector, implementation);
     }
 
-    function replaceFunctions_(address implementation, bytes4[] memory selectors)
+    function replaceFunctions_(bytes4[] memory selectors, address implementation)
         internal
         virtual
     {
@@ -50,14 +50,15 @@ abstract contract ProxyFacetedController is ProxyFacetedModel, ProxyModel {
             for (uint256 i; i < selectors.length; i++) {
                 bytes4 selector = selectors[i];
                 _enforceCanReplaceFunction(selector, implementation);
-                _setImplementation(selector, implementation);
+                _replaceFunction_(selector, implementation);
             }
         }
     }
 
     function removeFunction_(bytes4 selector) internal virtual {
-        _enforceCanRemoveFunction(selector, _implementation(selector));
-        _removeFunction(selector);
+        address implementation = _implementation(selector);
+        _enforceCanRemoveFunction(selector, implementation);
+        _removeFunction_(selector, implementation);
     }
 
     function removeFunctions_(bytes4[] memory selectors) internal virtual {
@@ -68,11 +69,32 @@ abstract contract ProxyFacetedController is ProxyFacetedModel, ProxyModel {
         }
     }
 
+    function _addFunction_(
+        bytes4 selector,
+        address implementation,
+        bool isUpgradable
+    ) internal virtual {
+        _addFunction(selector, implementation, isUpgradable);
+        _afterAddFunction(implementation);
+    }
+
+    function _replaceFunction_(bytes4 selector, address implementation) internal virtual {
+        address oldImplementation = _implementation(selector);
+        _replaceFunction(selector, implementation);
+        _afterRemoveFunction(oldImplementation);
+        _afterAddFunction(implementation);
+    }
+
+    function _removeFunction_(bytes4 selector, address implementation) internal virtual {
+        _removeFunction(selector);
+        _afterRemoveFunction(implementation);
+    }
+
     function _enforceCanAddFunctions(address implementation) internal view virtual {
         if (implementation == address(this)) {
             return;
         }
-        
+
         implementation.enforceIsContract();
     }
 
@@ -100,7 +122,7 @@ abstract contract ProxyFacetedController is ProxyFacetedModel, ProxyModel {
         if (_isUpgradable(selector)) {
             return;
         }
-        
+
         // Can't remove immutable functions - functions defined directly in the proxy w/o upgradability
         implementation.enforceNotEquals(address(this));
     }
