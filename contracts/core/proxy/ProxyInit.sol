@@ -10,8 +10,8 @@ abstract contract ProxyInit is ProxyModel {
     using IntegerUtils for uint256;
 
     constructor(address init, bytes memory data) {
-        init.enforceIsContract();
         data.length.enforceIsNotZero();
+        init.enforceIsContract();
         _Proxy(init, data);
     }
 }
