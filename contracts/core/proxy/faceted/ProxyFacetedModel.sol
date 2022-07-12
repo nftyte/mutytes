@@ -45,7 +45,7 @@ abstract contract ProxyFacetedModel {
         ProxyFacetedStorage storage ps = proxyFacetedStorage();
         ImplementationInfo memory info = ps.implementationInfo[implementation];
 
-        if (info.selectorCount++ == 0) {
+        if (++info.selectorCount == 1) {
             info.position = uint16(ps.implementations.length);
             ps.implementations.push(implementation);
         }
@@ -56,9 +56,8 @@ abstract contract ProxyFacetedModel {
     function _afterRemoveFunction(address implementation) internal virtual {
         ProxyFacetedStorage storage ps = proxyFacetedStorage();
         ImplementationInfo memory info = ps.implementationInfo[implementation];
-        uint16 selectorCount = info.selectorCount - 1;
 
-        if (selectorCount == 0) {
+        if (--info.selectorCount == 0) {
             uint16 position = info.position;
             uint256 lastPosition = ps.implementations.length - 1;
 
@@ -71,7 +70,7 @@ abstract contract ProxyFacetedModel {
             ps.implementations.pop();
             delete ps.implementationInfo[implementation];
         } else {
-            ps.implementationInfo[implementation].selectorCount = selectorCount;
+            ps.implementationInfo[implementation] = info;
         }
     }
 
