@@ -1,13 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-interface IERC721 /* is IERC165 */ {
-    event Transfer(address indexed from, address indexed to, uint256 indexed tokenId);
+import { IERC721Controller } from "./IERC721Controller.sol";
 
-    event Approval(address indexed owner, address indexed approved, uint256 indexed tokenId);
-
-    event ApprovalForAll(address indexed owner, address indexed operator, bool approved);
-
+interface IERC721 is IERC721Controller {
     function balanceOf(address owner) external returns (uint256);
 
     function ownerOf(uint256 tokenId) external returns (address);

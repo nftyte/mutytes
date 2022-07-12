@@ -1,19 +1,14 @@
 // SPDX-License-Identifier: MIT
-
 pragma solidity ^0.8.0;
 
-import { ProxyInternal } from "./ProxyInternal.sol";
+import { ProxyController } from "./ProxyController.sol";
 
-abstract contract Proxy is ProxyInternal {
-    function _fallback() internal virtual {
-        _delegate(_implementation());
-    }
-
+abstract contract Proxy is ProxyController {
     fallback() external payable virtual {
-        _fallback();
+        fallback_();
     }
 
     receive() external payable virtual {
-        _fallback();
+        fallback_();
     }
 }

@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-interface IERC173 /* is ERC165 */ {
-    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
+import { IERC173Controller } from "./IERC173Controller.sol";
 
+interface IERC173 is IERC173Controller {
     function owner() external returns (address);
 
     function transferOwnership(address newOwner) external;

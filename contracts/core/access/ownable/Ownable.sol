@@ -2,14 +2,14 @@
 pragma solidity ^0.8.0;
 
 import { IERC173 } from "../IERC173.sol";
-import { OwnableInternal } from "./OwnableInternal.sol";
+import { OwnableController } from "./OwnableController.sol";
 
-abstract contract Ownable is IERC173, OwnableInternal {
-    function owner() external view virtual override returns (address) {
-        return _owner();
+abstract contract Ownable is IERC173, OwnableController {
+    function owner() external view virtual returns (address) {
+        return owner_();
     }
 
-    function transferOwnership(address newOwner) external virtual override {
-        _transferOwnership(newOwner);
+    function transferOwnership(address newOwner) external virtual {
+        transferOwnership_(newOwner);
     }
 }

@@ -1,10 +1,5 @@
 // SPDX-License-Identifier: MIT
-
 pragma solidity ^0.8.0;
-
-import { OwnableUtils } from "./utils/OwnableUtils.sol";
-
-using OwnableUtils for OwnableStorage global;
 
 bytes32 constant OWNABLE_STORAGE_SLOT = keccak256("core.access.ownable.storage");
 
