@@ -4,68 +4,8 @@ pragma solidity ^0.8.0;
 import { proxyFacetedStorage, ProxyFacetedStorage, SelectorInfo, ImplementationInfo } from "./ProxyFacetedStorage.sol";
 
 abstract contract ProxyFacetedModel {
-    function _implementations()
-        internal
-        view
-        virtual
-        returns (address[] memory implementations)
-    {
-        return proxyFacetedStorage().implementations;
-    }
-
     function _implementation(bytes4 selector) internal view virtual returns (address) {
         return proxyFacetedStorage().selectorInfo[selector].implementation;
-    }
-
-    function _functionsByImplementation()
-        internal
-        view
-        virtual
-        returns (bytes4[][] memory selectors)
-    {
-        ProxyFacetedStorage storage ps = proxyFacetedStorage();
-        uint256 count = ps.implementations.length;
-        uint256[] memory current = new uint256[](count);
-        selectors = new bytes4[][](count);
-
-        unchecked {
-            for (uint256 i; i < count; i++) {
-                uint256 selectorCount = ps
-                    .implementationInfo[ps.implementations[i]]
-                    .selectorCount;
-                selectors[i] = new bytes4[](selectorCount);
-            }
-
-            for (uint256 i; i < ps.selectors.length; i++) {
-                bytes4 selector = ps.selectors[i];
-                uint256 position = ps
-                    .implementationInfo[ps.selectorInfo[selector].implementation]
-                    .position;
-                selectors[current[position]++][position] = selector;
-            }
-        }
-    }
-
-    function _getFunctions(address implementation)
-        internal
-        view
-        virtual
-        returns (bytes4[] memory selectors)
-    {
-        ProxyFacetedStorage storage ps = proxyFacetedStorage();
-        uint256 selectorCount = ps.implementationInfo[implementation].selectorCount;
-        selectors = new bytes4[](selectorCount);
-        uint256 index;
-
-        unchecked {
-            for (uint256 i; index < selectorCount; i++) {
-                bytes4 selector = ps.selectors[i];
-
-                if (ps.selectorInfo[selector].implementation == implementation) {
-                    selectors[index++] = selector;
-                }
-            }
-        }
     }
 
     function _addFunction(
