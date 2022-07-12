@@ -10,7 +10,7 @@ library IntegerUtils {
         if (i == 0) {
             return;
         }
-        
+
         revert UnexpectedNonZeroValue();
     }
 
@@ -24,7 +24,7 @@ library IntegerUtils {
         if (a < b) {
             return;
         }
-        
+
         // a >= b
         revert OutOfBoundsValue(a, b);
     }
