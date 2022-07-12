@@ -12,12 +12,11 @@ abstract contract DiamondReadableModel {
         returns (IDiamondReadable.Facet[] memory facets)
     {
         ProxyFacetedStorage storage ps = proxyFacetedStorage();
-        uint256 count = ps.implementations.length;
-        uint256[] memory current = new uint256[](count);
-        facets = new IDiamondReadable.Facet[](count);
+        facets = new IDiamondReadable.Facet[](ps.implementations.length);
+        uint256[] memory current = new uint256[](facets.length);
 
         unchecked {
-            for (uint256 i; i < count; i++) {
+            for (uint256 i; i < facets.length; i++) {
                 address facet = ps.implementations[i];
                 uint256 selectorCount = ps.implementationInfo[facet].selectorCount;
                 facets[i].facetAddress = facet;
@@ -40,12 +39,11 @@ abstract contract DiamondReadableModel {
         returns (bytes4[] memory selectors)
     {
         ProxyFacetedStorage storage ps = proxyFacetedStorage();
-        uint256 count = ps.implementationInfo[facet].selectorCount;
-        selectors = new bytes4[](count);
+        selectors = new bytes4[](ps.implementationInfo[facet].selectorCount);
         uint256 index;
 
         unchecked {
-            for (uint256 i; index < count; i++) {
+            for (uint256 i; index < selectors.length; i++) {
                 bytes4 selector = ps.selectors[i];
 
                 if (ps.selectorInfo[selector].implementation == facet) {
