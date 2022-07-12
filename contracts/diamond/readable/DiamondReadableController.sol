@@ -2,23 +2,16 @@
 pragma solidity ^0.8.0;
 
 import { IDiamondReadableController } from "./IDiamondReadableController.sol";
+import { DiamondReadableModel } from "./DiamondReadableModel.sol";
 import { ProxyFacetedModel } from "../../core/proxy/faceted/ProxyFacetedModel.sol";
 
 abstract contract DiamondReadableController is
     IDiamondReadableController,
+    DiamondReadableModel,
     ProxyFacetedModel
 {
-    function facets_() internal view virtual returns (Facet[] memory facets) {
-        address[] memory facetAddresses = _implementations();
-        bytes4[][] memory facetFunctions = _functionsByImplementation();
-        facets = new Facet[](facetAddresses.length);
-
-        unchecked {
-            for (uint256 i; i < facets.length; i++) {
-                facets[i].facetAddress = facetAddresses[i];
-                facets[i].functionSelectors = facetFunctions[i];
-            }
-        }
+    function facets_() internal view virtual returns (Facet[] memory) {
+        return _facets();
     }
 
     function facetFunctionSelectors_(address facet)
@@ -27,11 +20,11 @@ abstract contract DiamondReadableController is
         virtual
         returns (bytes4[] memory)
     {
-        return _getFunctions(facet);
+        return _facetFunctionSelectors(facet);
     }
 
     function facetAddresses_() internal view virtual returns (address[] memory) {
-        return _implementations();
+        return _facetAddresses();
     }
 
     function facetAddress_(bytes4 selector) internal view virtual returns (address) {
