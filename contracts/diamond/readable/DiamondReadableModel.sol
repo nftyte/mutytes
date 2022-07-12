@@ -18,9 +18,9 @@ abstract contract DiamondReadableModel {
 
         unchecked {
             for (uint256 i; i < count; i++) {
-                uint256 selectorCount = ps
-                    .implementationInfo[ps.implementations[i]]
-                    .selectorCount;
+                address facet = ps.implementations[i];
+                uint256 selectorCount = ps.implementationInfo[facet].selectorCount;
+                facets[i].facetAddress = facet;
                 facets[i].functionSelectors = new bytes4[](selectorCount);
             }
 
