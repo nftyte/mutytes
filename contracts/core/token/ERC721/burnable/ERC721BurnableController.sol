@@ -12,6 +12,10 @@ abstract contract ERC721BurnableController is
     ERC721SupplyModel,
     ERC721ApprovableController
 {
+    function burnedSupply_() internal view virtual returns (uint256) {
+        return _initialSupply() - _maxSupply();
+    }
+
     function burn_(uint256 tokenId) internal virtual {
         address owner = _ownerOf(tokenId);
         _enforceIsApproved(owner, msg.sender, tokenId);
