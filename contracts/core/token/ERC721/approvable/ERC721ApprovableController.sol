@@ -89,11 +89,9 @@ abstract contract ERC721ApprovableController is
         view
         virtual
     {
-        if (_isApproved(owner, operator)) {
-            return;
+        if (!_isApproved(owner, operator)) {
+            revert UnapprovedOperatorAction();
         }
-        
-        revert UnapprovedOperatorAction();
     }
 
     function _enforceIsApproved(
@@ -101,10 +99,8 @@ abstract contract ERC721ApprovableController is
         address operator,
         uint256 tokenId
     ) internal view virtual {
-        if (_isApproved(owner, operator, tokenId)) {
-            return;
+        if (!_isApproved(owner, operator, tokenId)) {
+            revert UnapprovedTokenAction(tokenId);
         }
-        
-        revert UnapprovedTokenAction(tokenId);
     }
 }

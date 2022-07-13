@@ -91,11 +91,9 @@ abstract contract ProxyFacetedController is ProxyFacetedModel, ProxyModel {
     }
 
     function _enforceCanAddFunctions(address implementation) internal view virtual {
-        if (implementation == address(this)) {
-            return;
+        if (implementation != address(this)) {
+            implementation.enforceIsContract();
         }
-
-        implementation.enforceIsContract();
     }
 
     function _enforceCanAddFunction(bytes4 selector, address) internal view virtual {
@@ -119,12 +117,10 @@ abstract contract ProxyFacetedController is ProxyFacetedModel, ProxyModel {
     {
         implementation.enforceIsNotZeroAddress();
 
-        if (_isUpgradable(selector)) {
-            return;
+        if (!_isUpgradable(selector)) {
+            // Can't remove immutable functions - functions defined directly in the proxy w/o upgradability
+            implementation.enforceNotEquals(address(this));
         }
-
-        // Can't remove immutable functions - functions defined directly in the proxy w/o upgradability
-        implementation.enforceNotEquals(address(this));
     }
 
     function _implementation() internal view virtual override returns (address) {

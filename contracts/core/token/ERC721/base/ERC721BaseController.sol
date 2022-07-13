@@ -22,10 +22,8 @@ abstract contract ERC721BaseController is
     }
     
     function _enforceTokenExists(uint256 tokenId) internal view virtual {
-        if (_tokenExists(tokenId)) {
-            return;
+        if (!_tokenExists(tokenId)) {
+            revert NonExistentToken(tokenId);
         }
-        
-        revert NonExistentToken(tokenId);
     }
 }
