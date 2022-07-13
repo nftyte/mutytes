@@ -44,7 +44,6 @@ abstract contract ERC721MintableController is
     {
         tokenId = to.toTokenId() | _mintBalanceOf(to);
         maxTokenId = tokenId + amount;
-
         _mint(to, amount);
         _updateAvailableSupply(amount);
     }
