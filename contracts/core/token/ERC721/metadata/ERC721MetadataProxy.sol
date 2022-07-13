@@ -26,10 +26,8 @@ abstract contract ERC721MetadataProxy is
         upgradable
         returns (string memory)
     {
-        _enforceTokenExists(tokenId);
-        (address provider, bool isProxyable) = tokenURIProviderInfo_(
-            _tokenURIProvider(tokenId)
-        );
+        uint256 providerId = tokenURIProvider_(tokenId);
+        (address provider, bool isProxyable) = _tokenURIProviderInfo(providerId);
 
         if (isProxyable) {
             _delegate(provider);
