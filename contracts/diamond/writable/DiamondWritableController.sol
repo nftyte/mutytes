@@ -22,17 +22,19 @@ abstract contract DiamondWritableController is
     ) internal virtual {
         _enforceOnlyOwner();
 
-        for (uint256 i; i < facetCuts.length; i++) {
-            FacetCut memory facetCut = facetCuts[i];
+        unchecked {
+            for (uint256 i; i < facetCuts.length; i++) {
+                FacetCut memory facetCut = facetCuts[i];
 
-            if (facetCut.action == FacetCutAction.Add) {
-                addFunctions_(facetCut.functionSelectors, facetCut.facetAddress, false);
-            } else if (facetCut.action == FacetCutAction.Replace) {
-                replaceFunctions_(facetCut.functionSelectors, facetCut.facetAddress);
-            } else if (facetCut.action == FacetCutAction.Remove) {
-                removeFunctions_(facetCut.functionSelectors);
-            } else {
-                revert UnexpectedFacetCutAction(facetCut.action);
+                if (facetCut.action == FacetCutAction.Add) {
+                    addFunctions_(facetCut.functionSelectors, facetCut.facetAddress, false);
+                } else if (facetCut.action == FacetCutAction.Replace) {
+                    replaceFunctions_(facetCut.functionSelectors, facetCut.facetAddress);
+                } else if (facetCut.action == FacetCutAction.Remove) {
+                    removeFunctions_(facetCut.functionSelectors);
+                } else {
+                    revert UnexpectedFacetCutAction(facetCut.action);
+                }
             }
         }
 
