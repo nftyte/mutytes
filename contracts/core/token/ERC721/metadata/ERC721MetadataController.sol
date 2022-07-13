@@ -4,6 +4,11 @@ pragma solidity ^0.8.0;
 import { ERC721MetadataModel } from "./ERC721MetadataModel.sol";
 
 abstract contract ERC721MetadataController is ERC721MetadataModel {
+    function ERC721Metadata_(string memory name, string memory symbol) internal virtual {
+        _setName(name);
+        _setSymbol(symbol);
+    }
+
     function name_() internal view virtual returns (string memory) {
         return _name();
     }

@@ -4,12 +4,6 @@ pragma solidity ^0.8.0;
 import { erc721SupplyStorage as es } from "./ERC721SupplyStorage.sol";
 
 abstract contract ERC721SupplyModel {
-    function _ERC721Supply(uint256 supply) internal virtual {
-        _setInitialSupply(supply);
-        _setMaxSupply(supply);
-        _setAvailableSupply(supply);
-    }
-
     function _initialSupply() internal view virtual returns (uint256) {
         return es().initial;
     }

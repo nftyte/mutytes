@@ -13,6 +13,15 @@ abstract contract ERC721TokenURIController is
 {
     using AddressUtils for address;
 
+    function ERC721TokenURI_(
+        uint256 id,
+        address provider,
+        bool isProxyable
+    ) internal virtual {
+        _setTokenURIProviderInfo(id, provider, isProxyable);
+        _setDefaultTokenURIProvider(id);
+    }
+
     function tokenURI_(uint256 tokenId) internal view virtual returns (string memory) {
         uint256 providerId = tokenURIProvider_(tokenId);
         (address provider, bool isProxyable) = _tokenURIProviderInfo(providerId);

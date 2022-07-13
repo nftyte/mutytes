@@ -4,11 +4,6 @@ pragma solidity ^0.8.0;
 import { erc721MetadataStorage as es } from "./ERC721MetadataStorage.sol";
 
 abstract contract ERC721MetadataModel {
-    function _ERC721Metadata(string memory name, string memory symbol) internal virtual {
-        _setName(name);
-        _setSymbol(symbol);
-    }
-
     function _setName(string memory name) internal virtual {
         es().name = name;
     }
