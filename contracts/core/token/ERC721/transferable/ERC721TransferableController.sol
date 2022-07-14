@@ -1,39 +1,21 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import { IERC721Transferable } from "./IERC721Transferable.sol";
 import { IERC721TransferableController } from "./IERC721TransferableController.sol";
 import { ERC721TransferableModel } from "./ERC721TransferableModel.sol";
+import { ERC721TransferableInit } from "./ERC721TransferableInit.sol";
 import { ERC721ApprovableController } from "../approvable/ERC721ApprovableController.sol";
 import { ERC721ReceiverUtils } from "../utils/ERC721ReceiverUtils.sol";
 import { AddressUtils } from "../../../utils/AddressUtils.sol";
 
-bytes4 constant SAFE_TRANSFER_FROM_1_SELECTOR = bytes4(
-    keccak256("safeTransferFrom(address,address,uint256,bytes)")
-);
-bytes4 constant SAFE_TRANSFER_FROM_2_SELECTOR = bytes4(
-    keccak256("safeTransferFrom(address,address,uint256)")
-);
-
 abstract contract ERC721TransferableController is
     IERC721TransferableController,
     ERC721TransferableModel,
+    ERC721TransferableInit,
     ERC721ApprovableController
 {
     using ERC721ReceiverUtils for address;
     using AddressUtils for address;
-
-    function IERC721Transferable_()
-        internal
-        pure
-        virtual
-        returns (bytes4[] memory selectors)
-    {
-        selectors = new bytes4[](3);
-        selectors[0] = SAFE_TRANSFER_FROM_1_SELECTOR;
-        selectors[1] = SAFE_TRANSFER_FROM_2_SELECTOR;
-        selectors[2] = IERC721Transferable.transferFrom.selector;
-    }
 
     function safeTransferFrom_(
         address from,

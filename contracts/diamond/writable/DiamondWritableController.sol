@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import { IDiamondWritable } from "./IDiamondWritable.sol";
 import { IDiamondWritableController } from "./IDiamondWritableController.sol";
+import { DiamondWritableInit } from "./DiamondWritableInit.sol";
 import { ProxyFacetedController } from "../../core/proxy/faceted/ProxyFacetedController.sol";
 import { OwnableController } from "../../core/access/ownable/OwnableController.sol";
 import { AddressUtils } from "../../core/utils/AddressUtils.sol";
@@ -10,21 +10,12 @@ import { IntegerUtils } from "../../core/utils/IntegerUtils.sol";
 
 abstract contract DiamondWritableController is
     IDiamondWritableController,
+    DiamondWritableInit,
     ProxyFacetedController,
     OwnableController
 {
     using AddressUtils for address;
     using IntegerUtils for uint256;
-
-    function IDiamondWritable_()
-        internal
-        pure
-        virtual
-        returns (bytes4[] memory selectors)
-    {
-        selectors = new bytes4[](1);
-        selectors[0] = IDiamondWritable.diamondCut.selector;
-    }
 
     function diamondCut_(
         FacetCut[] memory facetCuts,

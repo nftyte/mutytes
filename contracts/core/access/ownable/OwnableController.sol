@@ -1,23 +1,17 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import { IERC173 } from "../IERC173.sol";
 import { IERC173Controller } from "../IERC173Controller.sol";
 import { OwnableModel } from "./OwnableModel.sol";
+import { OwnableInit } from "./OwnableInit.sol";
 import { AddressUtils } from "../../utils/AddressUtils.sol";
 
-abstract contract OwnableController is IERC173Controller, OwnableModel {
+abstract contract OwnableController is IERC173Controller, OwnableModel, OwnableInit {
     using AddressUtils for address;
 
     modifier onlyOwner() {
         _enforceOnlyOwner();
         _;
-    }
-
-    function IOwnable_() internal pure virtual returns (bytes4[] memory selectors) {
-        selectors = new bytes4[](2);
-        selectors[0] = IERC173.owner.selector;
-        selectors[1] = IERC173.transferOwnership.selector;
     }
 
     function Ownable_(address owner) internal virtual {

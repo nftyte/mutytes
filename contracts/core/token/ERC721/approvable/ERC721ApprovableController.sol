@@ -1,32 +1,20 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import { IERC721Approvable } from "./IERC721Approvable.sol";
 import { IERC721ApprovableController } from "./IERC721ApprovableController.sol";
 import { ERC721ApprovableModel } from "./ERC721ApprovableModel.sol";
+import { ERC721ApprovableInit } from "./ERC721ApprovableInit.sol";
 import { ERC721BaseController } from "../base/ERC721BaseController.sol";
 import { AddressUtils } from "../../../utils/AddressUtils.sol";
 
 abstract contract ERC721ApprovableController is
     IERC721ApprovableController,
     ERC721ApprovableModel,
+    ERC721ApprovableInit,
     ERC721BaseController
 {
     using AddressUtils for address;
-
-    function IERC721Approvable_()
-        internal
-        pure
-        virtual
-        returns (bytes4[] memory selectors)
-    {
-        selectors = new bytes4[](4);
-        selectors[0] = IERC721Approvable.approve.selector;
-        selectors[1] = IERC721Approvable.setApprovalForAll.selector;
-        selectors[2] = IERC721Approvable.getApproved.selector;
-        selectors[3] = IERC721Approvable.isApprovedForAll.selector;
-    }
-
+    
     function approve_(address approved, uint256 tokenId) internal virtual {
         address owner = _ownerOf(tokenId);
         owner.enforceNotEquals(approved);
