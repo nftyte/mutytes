@@ -1,15 +1,15 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import { ERC721TokenURIModel } from "../../core/token/ERC721/tokenURI/ERC721TokenURIModel.sol";
+import { ERC721TokenURIController } from "../../core/token/ERC721/tokenURI/ERC721TokenURIController.sol";
 import { ERC721MintableController } from "../../core/token/ERC721/mintable/ERC721MintableController.sol";
 import { ERC721BurnableController } from "../../core/token/ERC721/burnable/ERC721BurnableController.sol";
 import { IntegerUtils } from "../../core/utils/IntegerUtils.sol";
 
 abstract contract MutytesTokenController is
-    ERC721TokenURIModel,
+    ERC721BurnableController,
     ERC721MintableController,
-    ERC721BurnableController
+    ERC721TokenURIController
 {
     using IntegerUtils for uint256;
 

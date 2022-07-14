@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+import { IMutytesToken } from "./IMutytesToken.sol";
 import { MutytesTokenController } from "./MutytesTokenController.sol";
 import { ERC165Proxy } from "../../core/introspection/ERC165Proxy.sol";
 import { ERC721Proxy } from "../../core/token/ERC721/ERC721Proxy.sol";
@@ -11,6 +12,7 @@ import { ERC721BurnableProxy, ERC721BurnableController } from "../../core/token/
 import { ERC721BatchTransferableProxy } from "../../core/token/ERC721/transferable/batch/ERC721BatchTransferableProxy.sol";
 
 abstract contract MutytesTokenProxy is
+    IMutytesToken,
     ERC165Proxy,
     ERC721Proxy,
     ERC721MetadataProxy,
@@ -20,6 +22,10 @@ abstract contract MutytesTokenProxy is
     ERC721BatchTransferableProxy,
     MutytesTokenController
 {
+    function mintedSupply() external virtual upgradable returns (uint256) {
+        return _mintedSupply();
+    }
+
     function _burn_(address owner, uint256 tokenId)
         internal
         virtual
