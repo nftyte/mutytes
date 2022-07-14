@@ -1,11 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import { IERC721Base } from "./base/IERC721Base.sol";
-import { IERC721Approvable } from "./approvable/IERC721Approvable.sol";
-import { IERC721Transferable } from "./transferable/IERC721Transferable.sol";
+import { IERC721Controller } from "./IERC721Controller.sol";
 
-interface IERC721 is IERC721Transferable, IERC721Approvable, IERC721Base {
+interface IERC721 is IERC721Controller {
     function balanceOf(address owner) external returns (uint256);
 
     function ownerOf(uint256 tokenId) external returns (address);
