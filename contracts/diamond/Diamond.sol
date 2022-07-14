@@ -1,7 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+import { IDiamond } from "./IDiamond.sol";
+import { DiamondController } from "./DiamondController.sol";
 import { DiamondReadable } from "./readable/DiamondReadable.sol";
 import { DiamondWritable } from "./writable/DiamondWritable.sol";
 
-contract Diamond is DiamondReadable, DiamondWritable {}
+contract Diamond is IDiamond, DiamondReadable, DiamondWritable, DiamondController {}
