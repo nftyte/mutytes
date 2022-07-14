@@ -3,7 +3,7 @@ pragma solidity ^0.8.0;
 
 import { MutytesTokenProxy } from "./token/MutytesTokenProxy.sol";
 import { SafeOwnableProxy } from "../core/access/ownable/safe/SafeOwnableProxy.sol";
-import { ProxyFaceted } from "../core/proxy/faceted/ProxyFaceted.sol";
+import { ProxyFacetedController as ProxyFaceted } from "../core/proxy/faceted/ProxyFacetedController.sol";
 import { Proxy } from "../core/proxy/Proxy.sol";
 
 contract MutytesProxy is
