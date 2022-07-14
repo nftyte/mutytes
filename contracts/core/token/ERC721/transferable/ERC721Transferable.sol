@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 import { IERC721Transferable } from "./IERC721Transferable.sol";
 import { ERC721TransferableController } from "./ERC721TransferableController.sol";
 
-abstract contract ERC721Transferable is
+contract ERC721Transferable is
     IERC721Transferable,
     ERC721TransferableController
 {

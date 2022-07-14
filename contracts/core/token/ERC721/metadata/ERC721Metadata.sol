@@ -5,7 +5,7 @@ import { IERC721Metadata } from "./IERC721Metadata.sol";
 import { ERC721MetadataController } from "./ERC721MetadataController.sol";
 import { ERC721TokenURIController } from "../tokenURI/ERC721TokenURIController.sol";
 
-abstract contract ERC721Metadata is
+contract ERC721Metadata is
     IERC721Metadata,
     ERC721MetadataController,
     ERC721TokenURIController

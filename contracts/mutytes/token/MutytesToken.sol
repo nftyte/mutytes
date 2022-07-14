@@ -10,7 +10,7 @@ import { ERC721Mintable, ERC721MintableController } from "../../core/token/ERC72
 import { ERC721Burnable, ERC721BurnableController } from "../../core/token/ERC721/burnable/ERC721Burnable.sol";
 import { ERC721BatchTransferable } from "../../core/token/ERC721/transferable/batch/ERC721BatchTransferable.sol";
 
-abstract contract MutytesToken is
+contract MutytesToken is
     ERC165,
     ERC721,
     ERC721Metadata,

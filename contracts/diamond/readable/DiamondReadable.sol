@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 import { IDiamondReadable } from "./IDiamondReadable.sol";
 import { DiamondReadableController } from "./DiamondReadableController.sol";
 
-abstract contract DiamondReadable is IDiamondReadable, DiamondReadableController {
+contract DiamondReadable is IDiamondReadable, DiamondReadableController {
     function facets() external view virtual returns (Facet[] memory) {
         return facets_();
     }

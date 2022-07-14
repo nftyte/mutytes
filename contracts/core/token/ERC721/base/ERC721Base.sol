@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 import { IERC721Base } from "./IERC721Base.sol";
 import { ERC721BaseController } from "./ERC721BaseController.sol";
 
-abstract contract ERC721Base is IERC721Base, ERC721BaseController {
+contract ERC721Base is IERC721Base, ERC721BaseController {
     function balanceOf(address owner) external view virtual returns (uint256) {
         return balanceOf_(owner);
     }

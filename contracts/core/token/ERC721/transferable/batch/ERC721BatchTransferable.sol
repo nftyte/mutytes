@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 import { IERC721BatchTransferable } from "./IERC721BatchTransferable.sol";
 import { ERC721BatchTransferableController } from "./ERC721BatchTransferableController.sol";
 
-abstract contract ERC721BatchTransferable is
+contract ERC721BatchTransferable is
     IERC721BatchTransferable,
     ERC721BatchTransferableController
 {

@@ -5,7 +5,7 @@ import { ISafeOwnable } from "./ISafeOwnable.sol";
 import { SafeOwnableController } from "./SafeOwnableController.sol";
 import { Ownable, OwnableController } from "../Ownable.sol";
 
-abstract contract SafeOwnable is ISafeOwnable, Ownable, SafeOwnableController {
+contract SafeOwnable is ISafeOwnable, Ownable, SafeOwnableController {
     function nomineeOwner() external view virtual returns (address) {
         return nomineeOwner_();
     }

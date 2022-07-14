@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 import { IERC721Enumerable } from "./IERC721Enumerable.sol";
 import { ERC721EnumerableController } from "./ERC721EnumerableController.sol";
 
-abstract contract ERC721Enumerable is IERC721Enumerable, ERC721EnumerableController {
+contract ERC721Enumerable is IERC721Enumerable, ERC721EnumerableController {
     function totalSupply() external view virtual returns (uint256) {
         return totalSupply_();
     }

@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 import { IERC173 } from "../IERC173.sol";
 import { OwnableController } from "./OwnableController.sol";
 
-abstract contract Ownable is IERC173, OwnableController {
+contract Ownable is IERC173, OwnableController {
     function owner() external view virtual returns (address) {
         return owner_();
     }

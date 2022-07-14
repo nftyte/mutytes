@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 import { IDiamondWritable } from "./IDiamondWritable.sol";
 import { DiamondWritableController } from "./DiamondWritableController.sol";
 
-abstract contract DiamondWritable is IDiamondWritable, DiamondWritableController {
+contract DiamondWritable is IDiamondWritable, DiamondWritableController {
     function diamondCut(
         FacetCut[] calldata facetCuts,
         address init,
