@@ -1,13 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import { IERC721MetadataController } from "./IERC721MetadataController.sol";
 import { ERC721MetadataModel } from "./ERC721MetadataModel.sol";
 import { ERC721MetadataInit } from "./ERC721MetadataInit.sol";
 import { ERC721TokenURIController } from "../tokenURI/ERC721TokenURIController.sol";
 
 abstract contract ERC721MetadataController is
-    IERC721MetadataController,
     ERC721MetadataModel,
     ERC721MetadataInit,
     ERC721TokenURIController
