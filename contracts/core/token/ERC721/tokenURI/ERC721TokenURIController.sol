@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+import { IERC721TokenURI } from "./IERC721TokenURI.sol";
 import { IERC721TokenURIController } from "./IERC721TokenURIController.sol";
 import { ERC721TokenURIModel } from "./ERC721TokenURIModel.sol";
 import { ERC721BaseController } from "../base/ERC721BaseController.sol";
@@ -12,6 +13,16 @@ abstract contract ERC721TokenURIController is
     ERC721BaseController
 {
     using AddressUtils for address;
+
+    function IERC721TokenURI_()
+        internal
+        pure
+        virtual
+        returns (bytes4[] memory selectors)
+    {
+        selectors = new bytes4[](1);
+        selectors[0] = IERC721TokenURI.tokenURI.selector;
+    }
 
     function ERC721TokenURI_(
         uint256 id,
