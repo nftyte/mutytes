@@ -19,10 +19,6 @@ abstract contract ERC721MintableController is
     using AddressUtils for address;
     using IntegerUtils for uint256;
 
-    function mintedSupply_() internal view virtual returns (uint256) {
-        return _initialSupply() - _availableSupply();
-    }
-
     function mintBalanceOf_(address owner) internal view virtual returns (uint256) {
         owner.enforceIsNotZeroAddress();
         return _mintBalanceOf(owner);
@@ -54,5 +50,9 @@ abstract contract ERC721MintableController is
         amount.enforceIsNotZero();
         amount.enforceNotGreaterThan(_availableSupply());
         (_mintBalanceOf(msg.sender) + amount).enforceNotGreaterThan(_maxMintBalance());
+    }
+
+    function _mintedSupply() internal view virtual returns (uint256) {
+        return _initialSupply() - _availableSupply();
     }
 }
