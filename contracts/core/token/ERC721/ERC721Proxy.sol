@@ -3,9 +3,9 @@ pragma solidity ^0.8.0;
 
 import { IERC721 } from "./IERC721.sol";
 import { ERC721Controller } from "./ERC721Controller.sol";
-import { ProxyUpgradable } from "../../proxy/upgradable/ProxyUpgradable.sol";
+import { ProxyUpgradableController } from "../../proxy/upgradable/ProxyUpgradableController.sol";
 
-abstract contract ERC721Proxy is IERC721, ERC721Controller, ProxyUpgradable {
+abstract contract ERC721Proxy is IERC721, ERC721Controller, ProxyUpgradableController {
     function balanceOf(address owner) external virtual upgradable returns (uint256) {
         return balanceOf_(owner);
     }

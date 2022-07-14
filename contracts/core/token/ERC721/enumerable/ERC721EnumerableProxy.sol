@@ -3,12 +3,12 @@ pragma solidity ^0.8.0;
 
 import { IERC721Enumerable } from "./IERC721Enumerable.sol";
 import { ERC721EnumerableController } from "./ERC721EnumerableController.sol";
-import { ProxyUpgradable } from "../../../proxy/upgradable/ProxyUpgradable.sol";
+import { ProxyUpgradableController } from "../../../proxy/upgradable/ProxyUpgradableController.sol";
 
 abstract contract ERC721EnumerableProxy is
     IERC721Enumerable,
     ERC721EnumerableController,
-    ProxyUpgradable
+    ProxyUpgradableController
 {
     function totalSupply() external virtual upgradable returns (uint256) {
         return totalSupply_();

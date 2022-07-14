@@ -3,12 +3,12 @@ pragma solidity ^0.8.0;
 
 import { IDiamondWritable } from "./IDiamondWritable.sol";
 import { DiamondWritableController } from "./DiamondWritableController.sol";
-import { ProxyUpgradable } from "../../core/proxy/upgradable/ProxyUpgradable.sol";
+import { ProxyUpgradableController } from "../../core/proxy/upgradable/ProxyUpgradableController.sol";
 
 abstract contract DiamondWritableProxy is
     IDiamondWritable,
     DiamondWritableController,
-    ProxyUpgradable
+    ProxyUpgradableController
 {
     function diamondCut(
         FacetCut[] calldata facetCuts,

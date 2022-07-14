@@ -3,12 +3,12 @@ pragma solidity ^0.8.0;
 
 import { IERC721BatchTransferable } from "./IERC721BatchTransferable.sol";
 import { ERC721BatchTransferableController } from "./ERC721BatchTransferableController.sol";
-import { ProxyUpgradable } from "../../../../proxy/upgradable/ProxyUpgradable.sol";
+import { ProxyUpgradableController } from "../../../../proxy/upgradable/ProxyUpgradableController.sol";
 
 abstract contract ERC721BatchTransferableProxy is
     IERC721BatchTransferable,
     ERC721BatchTransferableController,
-    ProxyUpgradable
+    ProxyUpgradableController
 {
     function safeBatchTransferFrom(
         address from,

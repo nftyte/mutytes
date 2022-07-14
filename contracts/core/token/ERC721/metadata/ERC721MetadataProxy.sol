@@ -4,13 +4,13 @@ pragma solidity ^0.8.0;
 import { IERC721Metadata } from "./IERC721Metadata.sol";
 import { ERC721MetadataController } from "./ERC721MetadataController.sol";
 import { ERC721TokenURIController } from "../tokenURI/ERC721TokenURIController.sol";
-import { ProxyUpgradable } from "../../../proxy/upgradable/ProxyUpgradable.sol";
+import { ProxyUpgradableController } from "../../../proxy/upgradable/ProxyUpgradableController.sol";
 
 abstract contract ERC721MetadataProxy is
     IERC721Metadata,
     ERC721MetadataController,
     ERC721TokenURIController,
-    ProxyUpgradable
+    ProxyUpgradableController
 {
     function name() external virtual upgradable returns (string memory) {
         return name_();

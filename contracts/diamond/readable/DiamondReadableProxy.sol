@@ -3,12 +3,12 @@ pragma solidity ^0.8.0;
 
 import { IDiamondReadable } from "./IDiamondReadable.sol";
 import { DiamondReadableController } from "./DiamondReadableController.sol";
-import { ProxyUpgradable } from "../../core/proxy/upgradable/ProxyUpgradable.sol";
+import { ProxyUpgradableController } from "../../core/proxy/upgradable/ProxyUpgradableController.sol";
 
 abstract contract DiamondReadableProxy is
     IDiamondReadable,
     DiamondReadableController,
-    ProxyUpgradable
+    ProxyUpgradableController
 {
     function facets() external virtual upgradable returns (Facet[] memory) {
         return facets_();
