@@ -2,11 +2,11 @@
 pragma solidity ^0.8.0;
 
 import { ERC721TokenURIController } from "./ERC721TokenURIController.sol";
-import { ProxyUpgradableController } from "../../../proxy/upgradable/ProxyUpgradableController.sol";
+import { ProxyController } from "../../../proxy/ProxyController.sol";
 
 abstract contract ERC721TokenURIProxyController is
     ERC721TokenURIController,
-    ProxyUpgradableController
+    ProxyController
 {
     function tokenURIProxyable_(uint256 tokenId)
         internal
