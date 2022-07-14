@@ -20,7 +20,7 @@ abstract contract ERC721MetadataController is
         selectors = new bytes4[](3);
         selectors[0] = IERC721Metadata.name.selector;
         selectors[1] = IERC721Metadata.symbol.selector;
-        selectors[2] = IERC721TokenURI_()[0];
+        selectors[2] = IERC721Metadata.tokenURI.selector;
     }
 
     function ERC721Metadata_(string memory name, string memory symbol) internal virtual {

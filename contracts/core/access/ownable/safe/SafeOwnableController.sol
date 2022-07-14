@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import { ISafeOwnable } from "./ISafeOwnable.sol";
+import { ISafeOwnable, IERC173 } from "./ISafeOwnable.sol";
 import { SafeOwnableModel } from "./SafeOwnableModel.sol";
 import { OwnableController } from "../OwnableController.sol";
 import { AddressUtils } from "../../../utils/AddressUtils.sol";
@@ -10,9 +10,9 @@ abstract contract SafeOwnableController is SafeOwnableModel, OwnableController {
     using AddressUtils for address;
 
     function ISafeOwnable_() internal pure virtual returns (bytes4[] memory selectors) {
-        bytes4[] memory ownable = IOwnable_();
         selectors = new bytes4[](4);
-        (selectors[0], selectors[1]) = (ownable[0], ownable[1]);
+        selectors[0] = IERC173.owner.selector;
+        selectors[1] = IERC173.transferOwnership.selector;
         selectors[2] = ISafeOwnable.nomineeOwner.selector;
         selectors[3] = ISafeOwnable.acceptOwnership.selector;
     }
