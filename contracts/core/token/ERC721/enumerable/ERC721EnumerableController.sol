@@ -2,14 +2,14 @@
 pragma solidity ^0.8.0;
 
 import { ERC721EnumerableModel } from "./ERC721EnumerableModel.sol";
-import { ERC721SupplyModel } from "../supply/ERC721SupplyModel.sol";
-import { ERC721BaseModel } from "../base/ERC721BaseModel.sol";
+import { ERC721SupplyController } from "../supply/ERC721SupplyController.sol";
+import { ERC721BaseController } from "../base/ERC721BaseController.sol";
 import { IntegerUtils } from "../../../utils/IntegerUtils.sol";
 
 abstract contract ERC721EnumerableController is
     ERC721EnumerableModel,
-    ERC721SupplyModel,
-    ERC721BaseModel
+    ERC721SupplyController,
+    ERC721BaseController
 {
     using IntegerUtils for uint256;
 

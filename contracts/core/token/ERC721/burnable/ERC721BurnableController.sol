@@ -3,13 +3,13 @@ pragma solidity ^0.8.0;
 
 import { IERC721BurnableController } from "./IERC721BurnableController.sol";
 import { ERC721BurnableModel } from "./ERC721BurnableModel.sol";
-import { ERC721SupplyModel } from "../supply/ERC721SupplyModel.sol";
+import { ERC721SupplyController } from "../supply/ERC721SupplyController.sol";
 import { ERC721ApprovableController } from "../approvable/ERC721ApprovableController.sol";
 
 abstract contract ERC721BurnableController is
     IERC721BurnableController,
     ERC721BurnableModel,
-    ERC721SupplyModel,
+    ERC721SupplyController,
     ERC721ApprovableController
 {
     function burnedSupply_() internal view virtual returns (uint256) {

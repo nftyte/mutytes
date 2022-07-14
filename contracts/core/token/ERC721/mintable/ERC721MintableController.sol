@@ -3,7 +3,7 @@ pragma solidity ^0.8.0;
 
 import { IERC721MintableController } from "./IERC721MintableController.sol";
 import { ERC721MintableModel } from "./ERC721MintableModel.sol";
-import { ERC721SupplyModel } from "../supply/ERC721SupplyModel.sol";
+import { ERC721SupplyController } from "../supply/ERC721SupplyController.sol";
 import { ERC721TokenUtils } from "../utils/ERC721TokenUtils.sol";
 import { AddressUtils } from "../../../utils/AddressUtils.sol";
 import { IntegerUtils } from "../../../utils/IntegerUtils.sol";
@@ -11,7 +11,7 @@ import { IntegerUtils } from "../../../utils/IntegerUtils.sol";
 abstract contract ERC721MintableController is
     IERC721MintableController,
     ERC721MintableModel,
-    ERC721SupplyModel
+    ERC721SupplyController
 {
     using ERC721TokenUtils for address;
     using AddressUtils for address;

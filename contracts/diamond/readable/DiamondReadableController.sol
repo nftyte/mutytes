@@ -3,12 +3,12 @@ pragma solidity ^0.8.0;
 
 import { IDiamondReadableController } from "./IDiamondReadableController.sol";
 import { DiamondReadableModel } from "./DiamondReadableModel.sol";
-import { ProxyFacetedModel } from "../../core/proxy/faceted/ProxyFacetedModel.sol";
+import { ProxyFacetedController } from "../../core/proxy/faceted/ProxyFacetedController.sol";
 
 abstract contract DiamondReadableController is
     IDiamondReadableController,
     DiamondReadableModel,
-    ProxyFacetedModel
+    ProxyFacetedController
 {
     function facets_() internal view virtual returns (Facet[] memory) {
         return _facets();

@@ -2,10 +2,10 @@
 pragma solidity ^0.8.0;
 
 import { ProxyFacetedModel } from "./ProxyFacetedModel.sol";
-import { ProxyModel } from "../ProxyModel.sol";
+import { ProxyController } from "../ProxyController.sol";
 import { AddressUtils } from "../../utils/AddressUtils.sol";
 
-abstract contract ProxyFacetedController is ProxyFacetedModel, ProxyModel {
+abstract contract ProxyFacetedController is ProxyFacetedModel, ProxyController {
     using AddressUtils for address;
 
     function addFunction_(
