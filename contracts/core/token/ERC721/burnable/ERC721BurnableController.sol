@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+import { IERC721Burnable } from "./IERC721Burnable.sol";
 import { IERC721BurnableController } from "./IERC721BurnableController.sol";
 import { ERC721BurnableModel } from "./ERC721BurnableModel.sol";
 import { ERC721SupplyController } from "../supply/ERC721SupplyController.sol";
@@ -12,6 +13,16 @@ abstract contract ERC721BurnableController is
     ERC721SupplyController,
     ERC721ApprovableController
 {
+    function IERC721Burnable_()
+        internal
+        pure
+        virtual
+        returns (bytes4[] memory selectors)
+    {
+        selectors = new bytes4[](1);
+        selectors[0] = IERC721Burnable.burn.selector;
+    }
+
     function burnedSupply_() internal view virtual returns (uint256) {
         return _initialSupply() - _maxSupply();
     }

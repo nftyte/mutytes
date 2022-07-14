@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+import { IERC721Enumerable } from "./IERC721Enumerable.sol";
 import { ERC721EnumerableModel } from "./ERC721EnumerableModel.sol";
 import { ERC721SupplyController } from "../supply/ERC721SupplyController.sol";
 import { ERC721BaseController } from "../base/ERC721BaseController.sol";
@@ -12,6 +13,18 @@ abstract contract ERC721EnumerableController is
     ERC721BaseController
 {
     using IntegerUtils for uint256;
+
+    function IERC721Enumerable_()
+        internal
+        pure
+        virtual
+        returns (bytes4[] memory selectors)
+    {
+        selectors = new bytes4[](3);
+        selectors[0] = IERC721Enumerable.totalSupply.selector;
+        selectors[1] = IERC721Enumerable.tokenOfOwnerByIndex.selector;
+        selectors[2] = IERC721Enumerable.tokenByIndex.selector;
+    }
 
     function totalSupply_() internal view virtual returns (uint256) {
         return _maxSupply() - _availableSupply();

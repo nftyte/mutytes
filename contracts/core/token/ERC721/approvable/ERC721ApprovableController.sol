@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+import { IERC721Approvable } from "./IERC721Approvable.sol";
 import { IERC721ApprovableController } from "./IERC721ApprovableController.sol";
 import { ERC721ApprovableModel } from "./ERC721ApprovableModel.sol";
 import { ERC721BaseController } from "../base/ERC721BaseController.sol";
@@ -13,6 +14,19 @@ abstract contract ERC721ApprovableController is
 {
     using AddressUtils for address;
 
+    function IERC721Approvable_()
+        internal
+        pure
+        virtual
+        returns (bytes4[] memory selectors)
+    {
+        selectors = new bytes4[](4);
+        selectors[0] = IERC721Approvable.approve.selector;
+        selectors[1] = IERC721Approvable.setApprovalForAll.selector;
+        selectors[2] = IERC721Approvable.getApproved.selector;
+        selectors[3] = IERC721Approvable.isApprovedForAll.selector;
+    }
+
     function approve_(address approved, uint256 tokenId) internal virtual {
         address owner = _ownerOf(tokenId);
         owner.enforceNotEquals(approved);
@@ -20,21 +34,13 @@ abstract contract ERC721ApprovableController is
         _approve_(owner, approved, tokenId);
     }
 
-    function setApprovalForAll_(address operator, bool approved)
-        internal
-        virtual
-    {
+    function setApprovalForAll_(address operator, bool approved) internal virtual {
         operator.enforceIsNotZeroAddress();
         operator.enforceNotEquals(msg.sender);
         _setApprovalForAll_(msg.sender, operator, approved);
     }
 
-    function getApproved_(uint256 tokenId)
-        internal
-        view
-        virtual
-        returns (address)
-    {
+    function getApproved_(uint256 tokenId) internal view virtual returns (address) {
         _enforceTokenExists(tokenId);
         return _getApproved(tokenId);
     }
@@ -80,15 +86,10 @@ abstract contract ERC721ApprovableController is
         address operator,
         uint256 tokenId
     ) internal view virtual returns (bool) {
-        return
-            _isApproved(owner, operator) || _getApproved(tokenId) == operator;
+        return _isApproved(owner, operator) || _getApproved(tokenId) == operator;
     }
 
-    function _enforceIsApproved(address owner, address operator)
-        internal
-        view
-        virtual
-    {
+    function _enforceIsApproved(address owner, address operator) internal view virtual {
         if (!_isApproved(owner, operator)) {
             revert UnapprovedOperatorAction();
         }

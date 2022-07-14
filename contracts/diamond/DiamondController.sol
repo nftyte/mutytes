@@ -9,4 +9,17 @@ abstract contract DiamondController is
     IDiamondController,
     DiamondReadableController,
     DiamondWritableController
-{}
+{
+    function IDiamond_() internal pure virtual returns (bytes4[] memory selectors) {
+        bytes4[] memory readable = IDiamondReadable_();
+        bytes4[] memory writable = IDiamondWritable_();
+        selectors = new bytes4[](5);
+        (selectors[0], selectors[1], selectors[2], selectors[3]) = (
+            readable[0],
+            readable[1],
+            readable[2],
+            readable[3]
+        );
+        selectors[4] = writable[0];
+    }
+}
