@@ -8,10 +8,6 @@ import { AddressUtils } from "../../../utils/AddressUtils.sol";
 abstract contract SafeOwnableController is SafeOwnableModel, OwnableController {
     using AddressUtils for address;
     
-    function SafeOwnable_(address owner) internal virtual {
-        Ownable_(owner);
-    }
-
     function nomineeOwner_() internal view virtual returns (address) {
         return _nomineeOwner();
     }

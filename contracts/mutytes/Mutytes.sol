@@ -6,6 +6,6 @@ import { SafeOwnable } from "../core/access/ownable/safe/SafeOwnable.sol";
 
 contract Mutytes is MutytesToken, SafeOwnable {
     constructor() {
-        SafeOwnable_(msg.sender);
+        Ownable_(msg.sender);
     }
 }
