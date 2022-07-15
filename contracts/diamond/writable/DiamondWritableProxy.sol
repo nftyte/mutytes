@@ -13,8 +13,17 @@ abstract contract DiamondWritableProxy is
     function diamondCut(
         FacetCut[] calldata facetCuts,
         address init,
+        bytes calldata data,
+        bool isUpgradable
+    ) external virtual upgradable {
+        diamondCut_(facetCuts, init, data, isUpgradable);
+    }
+
+    function diamondCut(
+        FacetCut[] calldata facetCuts,
+        address init,
         bytes calldata data
     ) external virtual upgradable {
-        diamondCut_(facetCuts, init, data);
+        diamondCut_(facetCuts, init, data, false);
     }
 }
