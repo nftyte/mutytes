@@ -13,13 +13,6 @@ interface IDiamondWritable is IDiamondWritableController {
     function diamondCut(
         FacetCut[] calldata facetCuts,
         address init,
-        bytes calldata data,
-        bool isUpgradable
-    ) external;
-
-    function diamondCut(
-        FacetCut[] calldata facetCuts,
-        address init,
         bytes calldata data
     ) external;
 }
