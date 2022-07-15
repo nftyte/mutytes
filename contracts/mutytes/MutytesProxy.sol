@@ -6,12 +6,7 @@ import { SafeOwnableProxy } from "../core/access/ownable/safe/SafeOwnableProxy.s
 import { ProxyFacetedController as ProxyFaceted } from "../core/proxy/faceted/ProxyFacetedController.sol";
 import { Proxy } from "../core/proxy/Proxy.sol";
 
-contract MutytesProxy is
-    MutytesTokenProxy,
-    SafeOwnableProxy,
-    ProxyFaceted,
-    Proxy
-{
+contract MutytesProxy is MutytesTokenProxy, SafeOwnableProxy, ProxyFaceted, Proxy {
     constructor(address init, bytes memory data) {
         Proxy_(init, data);
     }
