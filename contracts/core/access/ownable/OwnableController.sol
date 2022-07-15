@@ -18,7 +18,7 @@ abstract contract OwnableController is IERC173Controller, OwnableModel {
     }
 
     function Ownable_(address owner) internal virtual {
-        _transferOwnership_(owner);
+        transferOwnership_(owner);
     }
 
     function owner_() internal view virtual returns (address) {
@@ -26,11 +26,6 @@ abstract contract OwnableController is IERC173Controller, OwnableModel {
     }
 
     function transferOwnership_(address newOwner) internal virtual {
-        _enforceOnlyOwner();
-        _transferOwnership_(newOwner);
-    }
-
-    function _transferOwnership_(address newOwner) internal virtual {
         _transferOwnership(newOwner);
         emit OwnershipTransferred(_owner(), newOwner);
     }

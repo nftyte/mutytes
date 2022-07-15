@@ -9,7 +9,7 @@ contract DiamondWritable is IDiamondWritable, DiamondWritableController {
         FacetCut[] calldata facetCuts,
         address init,
         bytes calldata data
-    ) external virtual {
+    ) external virtual onlyOwner {
         diamondCut_(facetCuts, init, data);
     }
 }

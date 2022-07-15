@@ -10,7 +10,7 @@ abstract contract OwnableProxy is IERC173, OwnableController, ProxyUpgradableCon
         return owner_();
     }
 
-    function transferOwnership(address newOwner) external virtual upgradable {
+    function transferOwnership(address newOwner) external virtual upgradable onlyOwner {
         transferOwnership_(newOwner);
     }
 }

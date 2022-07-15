@@ -9,7 +9,7 @@ contract Ownable is IERC173, OwnableController {
         return owner_();
     }
 
-    function transferOwnership(address newOwner) external virtual {
+    function transferOwnership(address newOwner) external virtual onlyOwner {
         transferOwnership_(newOwner);
     }
 }

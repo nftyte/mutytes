@@ -20,8 +20,6 @@ abstract contract DiamondWritableController is
         address init,
         bytes memory data
     ) internal virtual {
-        _enforceOnlyOwner();
-
         unchecked {
             for (uint256 i; i < facetCuts.length; i++) {
                 FacetCut memory facetCut = facetCuts[i];
