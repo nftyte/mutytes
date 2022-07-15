@@ -18,8 +18,7 @@ abstract contract DiamondWritableController is
     function diamondCut_(
         FacetCut[] memory facetCuts,
         address init,
-        bytes memory data,
-        bool isUpgardable
+        bytes memory data
     ) internal virtual {
         _enforceOnlyOwner();
 
@@ -31,7 +30,7 @@ abstract contract DiamondWritableController is
                     addFunctions_(
                         facetCut.functionSelectors,
                         facetCut.facetAddress,
-                        isUpgardable
+                        false
                     );
                 } else if (facetCut.action == FacetCutAction.Replace) {
                     replaceFunctions_(facetCut.functionSelectors, facetCut.facetAddress);

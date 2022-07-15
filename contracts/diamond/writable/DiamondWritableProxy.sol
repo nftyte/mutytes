@@ -15,6 +15,6 @@ abstract contract DiamondWritableProxy is
         address init,
         bytes calldata data
     ) external virtual upgradable {
-        diamondCut_(facetCuts, init, data, false);
+        diamondCut_(facetCuts, init, data);
     }
 }
