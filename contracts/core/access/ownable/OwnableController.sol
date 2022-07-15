@@ -13,6 +13,10 @@ abstract contract OwnableController is IERC173Controller, OwnableModel {
         _;
     }
 
+    function Ownable_() internal virtual {
+        Ownable_(msg.sender);
+    }
+
     function Ownable_(address owner) internal virtual {
         _transferOwnership_(owner);
     }
