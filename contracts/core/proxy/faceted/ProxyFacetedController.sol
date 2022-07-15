@@ -69,6 +69,11 @@ abstract contract ProxyFacetedController is ProxyFacetedModel, ProxyController {
         }
     }
 
+    function setIsUpgradable_(bytes4 selector, bool isUpgradable) internal virtual {
+        _implementation(selector).enforceIsNotZeroAddress();
+        _setIsUpgradable(selector, isUpgradable);
+    }
+
     function _addFunction_(
         bytes4 selector,
         address implementation,
