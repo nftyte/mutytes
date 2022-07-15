@@ -3,7 +3,6 @@ pragma solidity ^0.8.0;
 
 import { IERC721TransferableController } from "./IERC721TransferableController.sol";
 import { ERC721TransferableModel } from "./ERC721TransferableModel.sol";
-import { ERC721TransferableInit } from "./ERC721TransferableInit.sol";
 import { ERC721ApprovableController } from "../approvable/ERC721ApprovableController.sol";
 import { ERC721ReceiverUtils } from "../utils/ERC721ReceiverUtils.sol";
 import { AddressUtils } from "../../../utils/AddressUtils.sol";
@@ -11,7 +10,6 @@ import { AddressUtils } from "../../../utils/AddressUtils.sol";
 abstract contract ERC721TransferableController is
     IERC721TransferableController,
     ERC721TransferableModel,
-    ERC721TransferableInit,
     ERC721ApprovableController
 {
     using ERC721ReceiverUtils for address;

@@ -1,15 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import { ERC721BatchTransferableInit } from "./ERC721BatchTransferableInit.sol";
 import { ERC721TransferableController } from "../ERC721TransferableController.sol";
 import { ERC721ReceiverUtils } from "../../utils/ERC721ReceiverUtils.sol";
 import { AddressUtils } from "../../../../utils/AddressUtils.sol";
 
-abstract contract ERC721BatchTransferableController is
-    ERC721BatchTransferableInit,
-    ERC721TransferableController
-{
+abstract contract ERC721BatchTransferableController is ERC721TransferableController {
     using ERC721ReceiverUtils for address;
     using AddressUtils for address;
 

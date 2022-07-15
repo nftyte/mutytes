@@ -3,10 +3,9 @@ pragma solidity ^0.8.0;
 
 import { IERC173Controller } from "../IERC173Controller.sol";
 import { OwnableModel } from "./OwnableModel.sol";
-import { OwnableInit } from "./OwnableInit.sol";
 import { AddressUtils } from "../../utils/AddressUtils.sol";
 
-abstract contract OwnableController is IERC173Controller, OwnableModel, OwnableInit {
+abstract contract OwnableController is IERC173Controller, OwnableModel {
     using AddressUtils for address;
 
     modifier onlyOwner() {

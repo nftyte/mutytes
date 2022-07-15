@@ -1,15 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import { ERC721SafeMintableInit } from "./ERC721SafeMintableInit.sol";
 import { ERC721MintableController } from "../ERC721MintableController.sol";
 import { ERC721ReceiverUtils } from "../../utils/ERC721ReceiverUtils.sol";
 import { AddressUtils } from "../../../../utils/AddressUtils.sol";
 
-abstract contract ERC721SafeMintableController is
-    ERC721SafeMintableInit,
-    ERC721MintableController
-{
+abstract contract ERC721SafeMintableController is ERC721MintableController {
     using ERC721ReceiverUtils for address;
     using AddressUtils for address;
 

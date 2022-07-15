@@ -3,14 +3,12 @@ pragma solidity ^0.8.0;
 
 import { IERC721TokenURIController } from "./IERC721TokenURIController.sol";
 import { ERC721TokenURIModel } from "./ERC721TokenURIModel.sol";
-import { ERC721TokenURIInit } from "./ERC721TokenURIInit.sol";
 import { ERC721BaseController } from "../base/ERC721BaseController.sol";
 import { AddressUtils } from "../../../utils/AddressUtils.sol";
 
 abstract contract ERC721TokenURIController is
     IERC721TokenURIController,
     ERC721TokenURIModel,
-    ERC721TokenURIInit,
     ERC721BaseController
 {
     using AddressUtils for address;

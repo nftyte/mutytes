@@ -3,14 +3,9 @@ pragma solidity ^0.8.0;
 
 import { IERC721BaseController } from "./IERC721BaseController.sol";
 import { ERC721BaseModel } from "./ERC721BaseModel.sol";
-import { ERC721BaseInit } from "./ERC721BaseInit.sol";
 import { AddressUtils } from "../../../utils/AddressUtils.sol";
 
-abstract contract ERC721BaseController is
-    IERC721BaseController,
-    ERC721BaseModel,
-    ERC721BaseInit
-{
+abstract contract ERC721BaseController is IERC721BaseController, ERC721BaseModel {
     using AddressUtils for address;
 
     function balanceOf_(address owner) internal view virtual returns (uint256) {

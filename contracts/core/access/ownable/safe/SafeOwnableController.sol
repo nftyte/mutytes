@@ -2,15 +2,10 @@
 pragma solidity ^0.8.0;
 
 import { SafeOwnableModel } from "./SafeOwnableModel.sol";
-import { SafeOwnableInit } from "./SafeOwnableInit.sol";
 import { OwnableController } from "../OwnableController.sol";
 import { AddressUtils } from "../../../utils/AddressUtils.sol";
 
-abstract contract SafeOwnableController is
-    SafeOwnableModel,
-    SafeOwnableInit,
-    OwnableController
-{
+abstract contract SafeOwnableController is SafeOwnableModel, OwnableController {
     using AddressUtils for address;
 
     function nomineeOwner_() internal view virtual returns (address) {
