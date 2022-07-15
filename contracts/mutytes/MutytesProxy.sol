@@ -8,6 +8,7 @@ import { Proxy } from "../core/proxy/Proxy.sol";
 
 contract MutytesProxy is MutytesTokenProxy, SafeOwnableProxy, ProxyFaceted, Proxy {
     constructor(address init, bytes memory data) {
+        MutytesToken_();
         Ownable_(msg.sender);
         Proxy_(init, data);
     }
