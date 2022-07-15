@@ -14,7 +14,7 @@ abstract contract DiamondWritableProxy is
         FacetCut[] calldata facetCuts,
         address init,
         bytes calldata data
-    ) external virtual upgradable {
+    ) external virtual upgradable onlyOwner {
         diamondCut_(facetCuts, init, data);
     }
 }
