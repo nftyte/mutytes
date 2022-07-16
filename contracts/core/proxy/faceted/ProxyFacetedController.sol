@@ -139,7 +139,17 @@ abstract contract ProxyFacetedController is ProxyFacetedModel, ProxyController {
         }
     }
 
-    function _implementation() internal view virtual override returns (address) {
-        return _implementation(msg.sig);
+    function implementation_() internal view virtual override returns (address) {
+        return implementation_(msg.sig);
+    }
+
+    function implementation_(bytes4 selector)
+        internal
+        view
+        virtual
+        returns (address implementation)
+    {
+        implementation = _implementation(selector);
+        implementation.enforceIsNotZeroAddress();
     }
 }

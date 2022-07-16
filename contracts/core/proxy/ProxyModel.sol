@@ -12,8 +12,6 @@ abstract contract ProxyModel {
         }
     }
 
-    function _implementation() internal view virtual returns (address);
-
     function _delegate(address implementation) internal virtual {
         assembly {
             calldatacopy(0, 0, calldatasize())

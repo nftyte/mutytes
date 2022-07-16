@@ -19,8 +19,5 @@ abstract contract ProxyController is ProxyModel {
         _delegate(implementation_());
     }
 
-    function implementation_() internal view virtual returns (address implementation) {
-        implementation = _implementation();
-        implementation.enforceIsContract();
-    }
+    function implementation_() internal view virtual returns (address);
 }
