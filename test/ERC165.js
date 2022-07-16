@@ -30,13 +30,13 @@ describe("ERC165 Test", async () => {
 });
 
 async function getInterfaceId(interfaceName) {
-    return await selectorCollection(await deployable(interfaceName).at(mutytes.address))
+    return selectorCollection(await deployable(interfaceName).at(mutytes.address))
         .interfaceId;
 }
 
 async function assertSupportsInterface(interfaceName, isSupported) {
     assert.equal(
-        await mutytes.supportsInterface(getInterfaceId(interfaceName)),
+        await mutytes.supportsInterface(await getInterfaceId(interfaceName)),
         isSupported
     );
 }
