@@ -1,18 +1,18 @@
 const { deployable } = require("./libraries/deployable");
 const { selectorCollection, FacetCutAction } = require("./libraries/selectors");
 
-async function deploy() {
+async function deploy(verbose = false) {
     const diamond = await deployable("MutytesDiamondFacet").deploy();
-    console.log("MutytesDiamondFacet deployed:", diamond.address);
+    if (verbose) console.log("MutytesDiamondFacet deployed:", diamond.address);
 
     const mutytes = await deployable("MutytesProxy").deploy(
         diamond.address,
         diamond.interface.encodeFunctionData("init(address)", [diamond.address])
     );
-    console.log("Mutytes deployed:", mutytes.address);
+    if (verbose) console.log("Mutytes deployed:", mutytes.address);
 
     const init = await deployable("MutytesInitFacet").deploy();
-    console.log("MutytesInitFacet deployed:", init.address);
+    if (verbose) console.log("MutytesInitFacet deployed:", init.address);
 
     const diamondFacet = await deployable("MutytesDiamondFacet").at(mutytes.address);
     const mutytesSelectors = selectorCollection(mutytes).removeFunctions(
@@ -50,13 +50,13 @@ async function deploy() {
     await diamondFacet.diamondCut(cuts, init.address, setFunctionsAndInterfacesCall, {
         gasLimit: 1500000,
     });
-    console.log("Completed diamond cut");
+    if (verbose) console.log("Completed diamond cut");
 
     return mutytes;
 }
 
 if (require.main === module) {
-    deploy()
+    deploy(true)
         .then(() => process.exit(0))
         .catch((error) => {
             console.error(error);
