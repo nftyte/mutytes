@@ -2,6 +2,15 @@ const { deployable } = require("./libraries/deployable");
 const { selectorCollection, FacetCutAction } = require("./libraries/selectors");
 
 async function deploy(verbose = false) {
+    const interpreter = await deployInterpreter();
+    if (verbose) console.log("MutyteInterpreter deployed:", interpreter.address);
+
+    const legacyAdapter = await deployable("MutytesLegacyAdapter").deploy(
+        interpreter.address,
+        "https://www.mutytes.com/"
+    );
+    if (verbose) console.log("MutytesLegacyAdapter deployed:", legacyAdapter.address);
+
     const diamond = await deployable("MutytesDiamondFacet").deploy();
     if (verbose) console.log("MutytesDiamondFacet deployed:", diamond.address);
 
@@ -15,6 +24,7 @@ async function deploy(verbose = false) {
     if (verbose) console.log("MutytesInitFacet deployed:", init.address);
 
     const diamondFacet = await deployable("MutytesDiamondFacet").at(mutytes.address);
+    const initFacet = await deployable("MutytesInitFacet").at(mutytes.address);
     const mutytesSelectors = selectorCollection(mutytes).removeFunctions(
         ...selectorCollection(await deployable("ERC721Enumerable").contract()).functions
     ).selectors;
@@ -52,7 +62,20 @@ async function deploy(verbose = false) {
     });
     if (verbose) console.log("Completed diamond cut");
 
+    await initFacet.initTokenURI(0, legacyAdapter.address, false, { gasLimit: 100000 });
+    if (verbose) console.log("Initialized token URI");
+
     return mutytes;
+}
+
+async function deployInterpreter() {
+    const models = await deployable("Models").deploy();
+    const Interpreter = await ethers.getContractFactory("MutyteInterpreter", {
+        libraries: { Models: models.address },
+    });
+    const interpreter = await Interpreter.deploy();
+    await interpreter.deployed();
+    return interpreter;
 }
 
 if (require.main === module) {
