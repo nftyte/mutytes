@@ -8,7 +8,10 @@ abstract contract ERC165Model {
         return es().supportedInterfaces[interfaceId];
     }
 
-    function _setSupportedInterface(bytes4 interfaceId, bool value) internal virtual {
-        es().supportedInterfaces[interfaceId] = value;
+    function _setSupportedInterface(bytes4 interfaceId, bool isSupported)
+        internal
+        virtual
+    {
+        es().supportedInterfaces[interfaceId] = isSupported;
     }
 }
