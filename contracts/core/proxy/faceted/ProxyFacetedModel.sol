@@ -74,7 +74,7 @@ abstract contract ProxyFacetedModel {
         }
     }
 
-    function _setIsUpgradable(bytes4 selector, bool isUpgradable) internal virtual {
+    function _setUpgradableFunction(bytes4 selector, bool isUpgradable) internal virtual {
         proxyFacetedStorage().selectorInfo[selector].isUpgradable = isUpgradable;
     }
 

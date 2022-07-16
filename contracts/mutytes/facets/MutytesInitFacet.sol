@@ -14,16 +14,22 @@ contract MutytesInitFacet is
     ERC721SupplyController,
     ProxyFacetedController
 {
+    function setFunctionsAndInterfaces(
+        bytes4[] calldata selectors,
+        bool isUpgradable,
+        bytes4[] calldata interfaceIds,
+        bool isSupported
+    ) external virtual onlyOwner {
+        setUpgradableFunctions_(selectors, isUpgradable);
+        _setSupportedInterfaces(interfaceIds, isSupported);
+    }
+
     function setUpgradableFunctions(bytes4[] calldata selectors, bool isUpgradable)
         external
         virtual
         onlyOwner
     {
-        unchecked {
-            for (uint256 i; i < selectors.length; i++) {
-                setIsUpgradable_(selectors[i], isUpgradable);
-            }
-        }
+        setUpgradableFunctions_(selectors, isUpgradable);
     }
 
     function setSupportedInterfaces(bytes4[] calldata interfaceIds, bool isSupported)
@@ -31,11 +37,7 @@ contract MutytesInitFacet is
         virtual
         onlyOwner
     {
-        unchecked {
-            for (uint256 i; i < interfaceIds.length; i++) {
-                _setSupportedInterface(interfaceIds[i], isSupported);
-            }
-        }
+        _setSupportedInterfaces(interfaceIds, isSupported);
     }
 
     function initTokenURI(

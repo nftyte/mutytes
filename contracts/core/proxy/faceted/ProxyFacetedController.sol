@@ -8,16 +8,6 @@ import { AddressUtils } from "../../utils/AddressUtils.sol";
 abstract contract ProxyFacetedController is ProxyFacetedModel, ProxyController {
     using AddressUtils for address;
 
-    function addFunction_(
-        bytes4 selector,
-        address implementation,
-        bool isUpgradable
-    ) internal virtual {
-        _enforceCanAddFunctions(implementation);
-        _enforceCanAddFunction(selector, implementation);
-        _addFunction_(selector, implementation, isUpgradable);
-    }
-
     function addFunctions_(
         bytes4[] memory selectors,
         address implementation,
@@ -34,10 +24,14 @@ abstract contract ProxyFacetedController is ProxyFacetedModel, ProxyController {
         }
     }
 
-    function replaceFunction_(bytes4 selector, address implementation) internal virtual {
+    function addFunction_(
+        bytes4 selector,
+        address implementation,
+        bool isUpgradable
+    ) internal virtual {
         _enforceCanAddFunctions(implementation);
-        _enforceCanReplaceFunction(selector, implementation);
-        _replaceFunction_(selector, implementation);
+        _enforceCanAddFunction(selector, implementation);
+        _addFunction_(selector, implementation, isUpgradable);
     }
 
     function replaceFunctions_(bytes4[] memory selectors, address implementation)
@@ -55,10 +49,10 @@ abstract contract ProxyFacetedController is ProxyFacetedModel, ProxyController {
         }
     }
 
-    function removeFunction_(bytes4 selector) internal virtual {
-        address implementation = _implementation(selector);
-        _enforceCanRemoveFunction(selector, implementation);
-        _removeFunction_(selector, implementation);
+    function replaceFunction_(bytes4 selector, address implementation) internal virtual {
+        _enforceCanAddFunctions(implementation);
+        _enforceCanReplaceFunction(selector, implementation);
+        _replaceFunction_(selector, implementation);
     }
 
     function removeFunctions_(bytes4[] memory selectors) internal virtual {
@@ -69,9 +63,26 @@ abstract contract ProxyFacetedController is ProxyFacetedModel, ProxyController {
         }
     }
 
-    function setIsUpgradable_(bytes4 selector, bool isUpgradable) internal virtual {
+    function removeFunction_(bytes4 selector) internal virtual {
+        address implementation = _implementation(selector);
+        _enforceCanRemoveFunction(selector, implementation);
+        _removeFunction_(selector, implementation);
+    }
+
+    function setUpgradableFunctions_(bytes4[] memory selectors, bool isUpgradable)
+        internal
+        virtual
+    {
+        unchecked {
+            for (uint256 i; i < selectors.length; i++) {
+                setUpgradableFunction_(selectors[i], isUpgradable);
+            }
+        }
+    }
+
+    function setUpgradableFunction_(bytes4 selector, bool isUpgradable) internal virtual {
         _implementation(selector).enforceIsNotZeroAddress();
-        _setIsUpgradable(selector, isUpgradable);
+        _setUpgradableFunction(selector, isUpgradable);
     }
 
     function _addFunction_(
