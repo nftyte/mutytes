@@ -22,8 +22,8 @@ contract MutytesToken is
     ERC721BatchTransferable,
     MutytesTokenController
 {
-    function mintedSupply() external view virtual returns (uint256) {
-        return _mintedSupply();
+    function availableSupply() external view virtual returns (uint256) {
+        return _availableSupply();
     }
 
     function _burn_(address owner, uint256 tokenId)

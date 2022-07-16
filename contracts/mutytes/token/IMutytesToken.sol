@@ -18,5 +18,5 @@ interface IMutytesToken is
     IERC721,
     IERC165
 {
-    function mintedSupply() external returns (uint256);
+    function availableSupply() external returns (uint256);
 }

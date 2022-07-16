@@ -22,8 +22,8 @@ abstract contract MutytesTokenProxy is
     ERC721BatchTransferableProxy,
     MutytesTokenController
 {
-    function mintedSupply() external virtual upgradable returns (uint256) {
-        return _mintedSupply();
+    function availableSupply() external virtual upgradable returns (uint256) {
+        return _availableSupply();
     }
 
     function _burn_(address owner, uint256 tokenId)
