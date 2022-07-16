@@ -15,7 +15,6 @@ contract MutytesDiamondFacet is Diamond {
 
     function _selectors() internal view virtual returns (bytes4[] memory selectors) {
         bytes memory selectorsPtr = SELECTORS_BYTECODE;
-
         assembly {
             selectors := add(selectorsPtr, 0x20)
         }
