@@ -10,7 +10,6 @@ import { ERC721EnumerableProxy } from "../../core/token/ERC721/enumerable/ERC721
 import { ERC721MintableProxy } from "../../core/token/ERC721/mintable/ERC721MintableProxy.sol";
 import { ERC721MintableController, ERC721MintableModel } from "../../core/token/ERC721/mintable/ERC721MintableController.sol";
 import { ERC721BurnableProxy, ERC721BurnableController } from "../../core/token/ERC721/burnable/ERC721BurnableProxy.sol";
-import { ERC721BatchTransferableProxy } from "../../core/token/ERC721/transferable/batch/ERC721BatchTransferableProxy.sol";
 
 abstract contract MutytesTokenProxy is
     IMutytesToken,
@@ -20,7 +19,6 @@ abstract contract MutytesTokenProxy is
     ERC721EnumerableProxy,
     ERC721MintableProxy,
     ERC721BurnableProxy,
-    ERC721BatchTransferableProxy,
     MutytesTokenController
 {
     function availableSupply() external virtual upgradable returns (uint256) {

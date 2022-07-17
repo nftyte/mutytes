@@ -10,7 +10,6 @@ import { ERC721Enumerable } from "../../core/token/ERC721/enumerable/ERC721Enume
 import { ERC721Mintable } from "../../core/token/ERC721/mintable/ERC721Mintable.sol";
 import { ERC721MintableController, ERC721MintableModel } from "../../core/token/ERC721/mintable/ERC721MintableController.sol";
 import { ERC721Burnable, ERC721BurnableController } from "../../core/token/ERC721/burnable/ERC721Burnable.sol";
-import { ERC721BatchTransferable } from "../../core/token/ERC721/transferable/batch/ERC721BatchTransferable.sol";
 
 contract MutytesToken is
     IMutytesToken,
@@ -20,7 +19,6 @@ contract MutytesToken is
     ERC721Enumerable,
     ERC721Mintable,
     ERC721Burnable,
-    ERC721BatchTransferable,
     MutytesTokenController
 {
     function availableSupply() external view virtual returns (uint256) {
