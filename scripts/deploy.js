@@ -1,5 +1,6 @@
 const { deployable } = require("./libraries/deployable");
-const { selectorCollection, FacetCutAction } = require("./libraries/selectors");
+const { FacetCutAction } = require("./libraries/diamond");
+const { selectorCollection } = require("./libraries/selectors");
 
 async function deploy(verbose = false) {
     const interpreter = await deployInterpreter();
