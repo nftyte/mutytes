@@ -33,15 +33,6 @@ abstract contract MutytesTokenProxy is
         super._burn_(owner, tokenId);
     }
 
-    function _enforceCanMint(uint256 amount)
-        internal
-        view
-        virtual
-        override(ERC721MintableController, MutytesTokenController)
-    {
-        super._enforceCanMint(amount);
-    }
-
     function _maxMintBalance()
         internal
         pure
@@ -50,5 +41,14 @@ abstract contract MutytesTokenProxy is
         returns (uint256)
     {
         return super._maxMintBalance();
+    }
+
+    function _enforceCanMint(uint256 amount)
+        internal
+        view
+        virtual
+        override(ERC721MintableController, MutytesTokenController)
+    {
+        super._enforceCanMint(amount);
     }
 }
