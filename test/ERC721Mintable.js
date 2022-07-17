@@ -18,7 +18,7 @@ describe("ERC721Mintable Test", async () => {
     before(async () => {
         [owner, ...accs] = await ethers.getSigners();
         const mutytesProxy = await deploy();
-        mutytes = await deployable("Mutytes").at(mutytesProxy.address);
+        mutytes = await deployable("MutytesAPI").at(mutytesProxy.address);
         initFacet = await deployable("MutytesInitFacet").at(mutytes.address);
         initBalances([owner, ...accs]);
         mutytes.on("Transfer", onTransfer);

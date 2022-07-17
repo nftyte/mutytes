@@ -9,7 +9,7 @@ let mutytes;
 describe("ERC165 Test", async () => {
     before(async () => {
         const mutytesProxy = await deploy();
-        mutytes = await deployable("Mutytes").at(mutytesProxy.address);
+        mutytes = await deployable("MutytesAPI").at(mutytesProxy.address);
     });
 
     for (let interfaceName of [

@@ -15,7 +15,7 @@ async function deploy(verbose = false) {
     const diamond = await deployable("MutytesDiamondFacet").deploy();
     if (verbose) console.log("MutytesDiamondFacet deployed:", diamond.address);
 
-    const mutytes = await deployable("MutytesProxy").deploy(
+    const mutytes = await deployable("Mutytes").deploy(
         diamond.address,
         diamond.interface.encodeFunctionData("init(address)", [diamond.address])
     );
