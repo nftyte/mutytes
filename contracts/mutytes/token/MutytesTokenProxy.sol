@@ -7,7 +7,8 @@ import { ERC165Proxy } from "../../core/introspection/ERC165Proxy.sol";
 import { ERC721Proxy } from "../../core/token/ERC721/ERC721Proxy.sol";
 import { ERC721MetadataProxy } from "../../core/token/ERC721/metadata/ERC721MetadataProxy.sol";
 import { ERC721EnumerableProxy } from "../../core/token/ERC721/enumerable/ERC721EnumerableProxy.sol";
-import { ERC721MintableProxy, ERC721MintableController } from "../../core/token/ERC721/mintable/ERC721MintableProxy.sol";
+import { ERC721MintableProxy } from "../../core/token/ERC721/mintable/ERC721MintableProxy.sol";
+import { ERC721MintableController, ERC721MintableModel } from "../../core/token/ERC721/mintable/ERC721MintableController.sol";
 import { ERC721BurnableProxy, ERC721BurnableController } from "../../core/token/ERC721/burnable/ERC721BurnableProxy.sol";
 import { ERC721BatchTransferableProxy } from "../../core/token/ERC721/transferable/batch/ERC721BatchTransferableProxy.sol";
 
@@ -41,5 +42,15 @@ abstract contract MutytesTokenProxy is
         override(ERC721MintableController, MutytesTokenController)
     {
         super._enforceCanMint(amount);
+    }
+
+    function _maxMintBalance()
+        internal
+        pure
+        virtual
+        override(ERC721MintableModel, MutytesTokenController)
+        returns (uint256)
+    {
+        return super._maxMintBalance();
     }
 }

@@ -7,7 +7,8 @@ import { ERC165 } from "../../core/introspection/ERC165.sol";
 import { ERC721 } from "../../core/token/ERC721/ERC721.sol";
 import { ERC721Metadata } from "../../core/token/ERC721/metadata/ERC721Metadata.sol";
 import { ERC721Enumerable } from "../../core/token/ERC721/enumerable/ERC721Enumerable.sol";
-import { ERC721Mintable, ERC721MintableController } from "../../core/token/ERC721/mintable/ERC721Mintable.sol";
+import { ERC721Mintable } from "../../core/token/ERC721/mintable/ERC721Mintable.sol";
+import { ERC721MintableController, ERC721MintableModel } from "../../core/token/ERC721/mintable/ERC721MintableController.sol";
 import { ERC721Burnable, ERC721BurnableController } from "../../core/token/ERC721/burnable/ERC721Burnable.sol";
 import { ERC721BatchTransferable } from "../../core/token/ERC721/transferable/batch/ERC721BatchTransferable.sol";
 
@@ -41,5 +42,15 @@ contract MutytesToken is
         override(ERC721MintableController, MutytesTokenController)
     {
         super._enforceCanMint(amount);
+    }
+
+    function _maxMintBalance()
+        internal
+        pure
+        virtual
+        override(ERC721MintableModel, MutytesTokenController)
+        returns (uint256)
+    {
+        return super._maxMintBalance();
     }
 }

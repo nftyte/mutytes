@@ -29,4 +29,8 @@ abstract contract MutytesTokenController is
         msg.value.enforceIsZero();
         super._enforceCanMint(amount);
     }
+
+    function _maxMintBalance() internal pure virtual override returns (uint256) {
+        return 10;
+    }
 }
