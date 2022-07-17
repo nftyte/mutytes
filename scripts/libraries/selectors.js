@@ -1,5 +1,3 @@
-const FacetCutAction = { Add: 0, Replace: 1, Remove: 2 };
-
 function SelectorCollection(src = null) {
     if (src) {
         if (
@@ -71,5 +69,4 @@ Object.assign(SelectorCollection.prototype, {
     },
 });
 
-exports.FacetCutAction = FacetCutAction;
 exports.selectorCollection = (src) => new SelectorCollection(src);
