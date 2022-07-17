@@ -9,6 +9,10 @@ contract ERC721Enumerable is IERC721Enumerable, ERC721EnumerableController {
         return totalSupply_();
     }
 
+    function tokenByIndex(uint256 index) external view virtual returns (uint256) {
+        return tokenByIndex_(index);
+    }
+
     function tokenOfOwnerByIndex(address owner, uint256 index)
         external
         view
@@ -16,9 +20,5 @@ contract ERC721Enumerable is IERC721Enumerable, ERC721EnumerableController {
         returns (uint256)
     {
         return tokenOfOwnerByIndex_(owner, index);
-    }
-
-    function tokenByIndex(uint256 index) external view virtual returns (uint256) {
-        return tokenByIndex_(index);
     }
 }

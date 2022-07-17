@@ -14,6 +14,10 @@ abstract contract ERC721EnumerableProxy is
         return totalSupply_();
     }
 
+    function tokenByIndex(uint256 index) external virtual upgradable returns (uint256) {
+        return tokenByIndex_(index);
+    }
+
     function tokenOfOwnerByIndex(address owner, uint256 index)
         external
         virtual
@@ -21,9 +25,5 @@ abstract contract ERC721EnumerableProxy is
         returns (uint256)
     {
         return tokenOfOwnerByIndex_(owner, index);
-    }
-
-    function tokenByIndex(uint256 index) external virtual upgradable returns (uint256) {
-        return tokenByIndex_(index);
     }
 }

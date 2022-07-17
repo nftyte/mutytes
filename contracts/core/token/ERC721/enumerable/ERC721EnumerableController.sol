@@ -17,6 +17,11 @@ abstract contract ERC721EnumerableController is
         return _maxSupply() - _availableSupply();
     }
 
+    function tokenByIndex_(uint256 index) internal view virtual returns (uint256) {
+        index.enforceLessThan(totalSupply_());
+        return _tokenByIndex_(index);
+    }
+
     function tokenOfOwnerByIndex_(address owner, uint256 index)
         internal
         view
@@ -25,11 +30,6 @@ abstract contract ERC721EnumerableController is
     {
         index.enforceLessThan(_balanceOf(owner));
         return _tokenOfOwnerByIndex_(owner, index);
-    }
-
-    function tokenByIndex_(uint256 index) internal view virtual returns (uint256) {
-        index.enforceLessThan(totalSupply_());
-        return _tokenByIndex_(index);
     }
 
     function _tokenOfOwnerByIndex_(address owner, uint256 index)
