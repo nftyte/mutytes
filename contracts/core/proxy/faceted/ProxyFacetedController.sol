@@ -8,6 +8,20 @@ import { AddressUtils } from "../../utils/AddressUtils.sol";
 abstract contract ProxyFacetedController is ProxyFacetedModel, ProxyController {
     using AddressUtils for address;
 
+    function implementation_() internal view virtual override returns (address) {
+        return implementation_(msg.sig);
+    }
+
+    function implementation_(bytes4 selector)
+        internal
+        view
+        virtual
+        returns (address implementation)
+    {
+        implementation = _implementation(selector);
+        implementation.enforceIsNotZeroAddress();
+    }
+
     function addFunctions_(
         bytes4[] memory selectors,
         address implementation,
@@ -137,19 +151,5 @@ abstract contract ProxyFacetedController is ProxyFacetedModel, ProxyController {
             // Can't remove immutable functions - functions defined directly in the proxy w/o upgradability
             implementation.enforceNotEquals(address(this));
         }
-    }
-
-    function implementation_() internal view virtual override returns (address) {
-        return implementation_(msg.sig);
-    }
-
-    function implementation_(bytes4 selector)
-        internal
-        view
-        virtual
-        returns (address implementation)
-    {
-        implementation = _implementation(selector);
-        implementation.enforceIsNotZeroAddress();
     }
 }
