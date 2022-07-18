@@ -14,7 +14,7 @@ let mutytes, mutytesInterface, initFacet, initFacetInterface, diamondFacet, owne
 
 const addresses = [];
 
-describe("Diamond Test", async () => {
+describe.only("Diamond Test", async () => {
     before(async () => {
         [owner, ...accs] = await ethers.getSigners();
         const mutytesProxy = await deploy();
@@ -92,9 +92,9 @@ describe("Diamond Test", async () => {
             },
         ];
         await diamondFacet.diamondCut(cuts, ethers.constants.AddressZero, "0x");
-        await mutytes.mint(10, { value: ethers.utils.parseEther((0.1).toFixed(2)) });
-        assert.equal(await mutytes.balanceOf(owner.address), 10);
-        assert.equal(await mutytes.availableSupply(), 90);
+        await mutytes.mint(11);
+        assert.equal(await mutytes.balanceOf(owner.address), 11);
+        assert.equal(await mutytes.availableSupply(), 89);
     });
 
     it("shouldn't add existing functions", async () => {
@@ -108,7 +108,7 @@ describe("Diamond Test", async () => {
             removeFunctions(
                 selectorCollection(
                     await deployable("ERC721Enumerable").contract()
-                ).remove("totalSupply()").selectors
+                ).removeFunctions("totalSupply()").selectors
             )
         ).to.be.revertedWith("ZeroAddress");
     });
