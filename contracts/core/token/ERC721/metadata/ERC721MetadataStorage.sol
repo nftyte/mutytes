@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: MIT
+
 pragma solidity ^0.8.0;
 
 bytes32 constant ERC721_METADATA_STORAGE_SLOT = keccak256("core.token.erc721.metadata.storage");

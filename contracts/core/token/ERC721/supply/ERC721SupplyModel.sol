@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: MIT
+
 pragma solidity ^0.8.0;
 
 import { erc721SupplyStorage as es } from "./ERC721SupplyStorage.sol";

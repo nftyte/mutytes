@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: MIT
+
 pragma solidity ^0.8.0;
 
 bytes32 constant SAFE_OWNABLE_STORAGE_SLOT = keccak256("core.access.ownable.safe.storage");
