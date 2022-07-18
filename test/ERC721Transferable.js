@@ -15,7 +15,7 @@ let mutytes, owner, accs, availableSupply;
 
 const initialSupply = 1000;
 
-describe("ERC721Transferable Test", async () => {
+describe.only("ERC721Transferable Test", async () => {
     before(async () => {
         [owner, ...accs] = await ethers.getSigners();
         const mutytesProxy = await deploy();
@@ -38,6 +38,16 @@ describe("ERC721Transferable Test", async () => {
         assert.equal(await mutytes.balanceOf(to.address), balanceOf(to));
         assert.equal(await mutytes.balanceOf(owner.address), balanceOf(owner));
         assert.equal(await mutytes.ownerOf(tokensOf(to)[0]), to.address);
+    });
+
+    it("should transfer tokens with safety check", async () => {
+        await expect(
+            mutytes["safeTransferFrom(address,address,uint256)"](
+                owner.address,
+                mutytes.address,
+                tokensOf(owner)[0]
+            )
+        ).to.be.revertedWith("NonERC721Receiver");
     });
 
     it("should transfer more tokens", async () => {
