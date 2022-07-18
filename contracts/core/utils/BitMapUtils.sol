@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 /**
  * @title Bitmap utilities
  */
-library BitMapUtils {
+library BitmapUtils {
     function get(uint256 bitmap, uint256 index) internal pure returns (uint256) {
         return (bitmap >> index) & 1;
     }

@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import { BitMapUtils } from "../../../utils/BitMapUtils.sol";
+import { BitmapUtils } from "../../../utils/BitmapUtils.sol";
 
 /**
  * @title ERC721 token inventory utilities
  */
 library ERC721InventoryUtils {
-    using BitMapUtils for uint256;
+    using BitmapUtils for uint256;
 
     uint256 constant BALANCE_BITSIZE = 16;
     uint256 constant BALANCE_BITMASK = (1 << BALANCE_BITSIZE) - 1;              // = 0xFFFF;
