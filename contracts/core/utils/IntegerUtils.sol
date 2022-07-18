@@ -8,6 +8,7 @@ library IntegerUtils {
     error UnexpectedZeroValue();
     error UnexpectedNonZeroValue();
     error OutOfBoundsValue(uint256 value, uint256 length);
+    error UnexpectedValue();
 
     function enforceIsZero(uint256 i) internal pure {
         if (i == 0) {
@@ -28,7 +29,6 @@ library IntegerUtils {
             return;
         }
 
-        // a >= b
         revert OutOfBoundsValue(a, b);
     }
 
@@ -43,13 +43,26 @@ library IntegerUtils {
             return;
         }
 
-        // b >= a
         revert OutOfBoundsValue(b, a);
     }
 
     function enforceNotGreaterThan(uint256 a, uint256 b) internal pure {
         if (a > b) {
             revert OutOfBoundsValue(a, b);
+        }
+    }
+    
+    function enforceEquals(uint256 a, uint256 b) internal pure {
+        if (a == b) {
+            return;
+        }
+
+        revert UnexpectedValue();
+    }
+
+    function enforceNotEquals(uint256 a, uint256 b) internal pure {
+        if (a == b) {
+            revert UnexpectedValue();
         }
     }
 }
