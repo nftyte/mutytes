@@ -8,7 +8,7 @@ async function deploy(verbose = false) {
 
     const legacyAdapter = await deployable("MutytesLegacyProvider").deploy(
         interpreter.address,
-        "https://www.mutytes.com/"
+        "https://www.mutytes.com/mutyte/"
     );
     if (verbose) console.log("MutytesLegacyProvider deployed:", legacyAdapter.address);
 
