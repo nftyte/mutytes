@@ -7,7 +7,7 @@ import { IERC721TokenURIProvider } from "../../core/token/ERC721/tokenURI/IERC72
 /**
  * @title Mutytes legacy token URI provider implementation
  */
-contract MutytesLegacyAdapter is IERC721TokenURIProvider {
+contract MutytesLegacyProvider is IERC721TokenURIProvider {
     address _interpreterAddress;
     string _externalURL;
 

@@ -6,11 +6,11 @@ async function deploy(verbose = false) {
     const interpreter = await deployInterpreter();
     if (verbose) console.log("MutyteInterpreter deployed:", interpreter.address);
 
-    const legacyAdapter = await deployable("MutytesLegacyAdapter").deploy(
+    const legacyAdapter = await deployable("MutytesLegacyProvider").deploy(
         interpreter.address,
         "https://www.mutytes.com/"
     );
-    if (verbose) console.log("MutytesLegacyAdapter deployed:", legacyAdapter.address);
+    if (verbose) console.log("MutytesLegacyProvider deployed:", legacyAdapter.address);
 
     const diamond = await deployable("MutytesDiamondFacet").deploy();
     if (verbose) console.log("MutytesDiamondFacet deployed:", diamond.address);
