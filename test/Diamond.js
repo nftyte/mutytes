@@ -14,7 +14,7 @@ let mutytes, mutytesInterface, initFacet, initFacetInterface, diamondFacet, owne
 
 const addresses = [];
 
-describe.only("Diamond Test", async () => {
+describe("Diamond Test", async () => {
     before(async () => {
         [owner, ...accs] = await ethers.getSigners();
         const mutytesProxy = await deploy();
