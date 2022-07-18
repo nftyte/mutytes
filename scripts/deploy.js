@@ -27,7 +27,8 @@ async function deploy(verbose = false) {
     const diamondFacet = await deployable("MutytesDiamondFacet").at(mutytes.address);
     const initFacet = await deployable("MutytesInitFacet").at(mutytes.address);
     const mutytesSelectors = selectorCollection(mutytes).removeFunctions(
-        ...selectorCollection(await deployable("ERC721Enumerable").contract()).functions
+        "tokenByIndex(uint256)",
+        "tokenOfOwnerByIndex(address,uint256)"
     ).selectors;
     const cuts = [
         {

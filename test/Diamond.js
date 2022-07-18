@@ -22,8 +22,8 @@ describe("Diamond Test", async () => {
         initFacet = await deployable("MutytesInitFacet").at(mutytes.address);
         diamondFacet = await deployable("MutytesDiamondFacet").at(mutytes.address);
         mutytesInterface = selectorCollection(mutytes).removeFunctions(
-            ...selectorCollection(await deployable("ERC721Enumerable").contract())
-                .functions
+            "tokenByIndex(uint256)",
+            "tokenOfOwnerByIndex(address,uint256)"
         );
         initFacetInterface = selectorCollection(initFacet);
     });
@@ -106,8 +106,9 @@ describe("Diamond Test", async () => {
     it("shouldn't remove non-existent functions", async () => {
         await expect(
             removeFunctions(
-                selectorCollection(await deployable("ERC721Enumerable").contract())
-                    .selectors
+                selectorCollection(
+                    await deployable("ERC721Enumerable").contract()
+                ).remove("totalSupply()").selectors
             )
         ).to.be.revertedWith("ZeroAddress");
     });
