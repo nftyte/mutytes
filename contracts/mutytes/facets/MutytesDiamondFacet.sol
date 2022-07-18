@@ -6,10 +6,17 @@ import { IDiamondWritable } from "../../diamond/writable/IDiamondWritable.sol";
 
 bytes constant SELECTORS_BYTECODE = abi.encode(1, IDiamondWritable.diamondCut.selector);
 
+/**
+ * @title Mutytes diamond implementation facet
+ */
 contract MutytesDiamondFacet is Diamond {
-    function init(address diamondAddress) external virtual onlyOwner {
+    /**
+     * @notice Initialize the diamond proxy
+     * @param facetAddress The diamond facet address
+     */
+    function init(address facetAddress) external virtual onlyOwner {
         FacetCut[] memory facetCuts = new FacetCut[](1);
-        facetCuts[0] = FacetCut(diamondAddress, FacetCutAction.Add, _selectors());
+        facetCuts[0] = FacetCut(facetAddress, FacetCutAction.Add, _selectors());
         diamondCut_(facetCuts, address(0), "");
     }
 

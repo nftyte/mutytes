@@ -11,6 +11,9 @@ import { ERC721Mintable } from "../../core/token/ERC721/mintable/ERC721Mintable.
 import { ERC721MintableController, ERC721MintableModel } from "../../core/token/ERC721/mintable/ERC721MintableController.sol";
 import { ERC721Burnable, ERC721BurnableController } from "../../core/token/ERC721/burnable/ERC721Burnable.sol";
 
+/**
+ * @title Mutytes token implementation
+ */
 contract MutytesToken is
     IMutytesToken,
     ERC165,
@@ -21,6 +24,9 @@ contract MutytesToken is
     ERC721Burnable,
     MutytesTokenController
 {
+    /**
+     * @inheritdoc IMutytesToken
+     */
     function availableSupply() external view virtual returns (uint256) {
         return _availableSupply();
     }

@@ -8,6 +8,9 @@ import { IERC721Enumerable } from "../../core/token/ERC721/enumerable/IERC721Enu
 import { IERC721Mintable } from "../../core/token/ERC721/mintable/IERC721Mintable.sol";
 import { IERC721Burnable } from "../../core/token/ERC721/burnable/IERC721Burnable.sol";
 
+/**
+ * @title Mutytes token interface
+ */
 interface IMutytesToken is
     IERC721Burnable,
     IERC721Mintable,
@@ -16,5 +19,9 @@ interface IMutytesToken is
     IERC721,
     IERC165
 {
+    /**
+     * @notice Get the available supply
+     * @return supply The available supply amount
+     */
     function availableSupply() external returns (uint256);
 }

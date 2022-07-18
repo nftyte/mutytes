@@ -2,6 +2,9 @@
 
 pragma solidity ^0.8.0;
 
+/**
+ * @title Mutytes legacy token URI provider interface
+ */
 interface IMutytesLegacyProvider {
     struct TokenData {
         uint256 id;

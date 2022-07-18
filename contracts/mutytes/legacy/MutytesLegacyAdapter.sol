@@ -4,6 +4,9 @@ pragma solidity ^0.8.0;
 import { IMutytesLegacyProvider } from "./IMutytesLegacyProvider.sol";
 import { IERC721TokenURIProvider } from "../../core/token/ERC721/tokenURI/IERC721TokenURIProvider.sol";
 
+/**
+ * @title Mutytes legacy token URI provider implementation
+ */
 contract MutytesLegacyAdapter is IERC721TokenURIProvider {
     address _interpreterAddress;
     string _externalURL;
@@ -13,6 +16,9 @@ contract MutytesLegacyAdapter is IERC721TokenURIProvider {
         _externalURL = externalURL;
     }
 
+    /**
+     * @inheritdoc IERC721TokenURIProvider
+     */
     function tokenURI(uint256 tokenId) external view virtual returns (string memory) {
         IMutytesLegacyProvider interpreter = IMutytesLegacyProvider(_interpreterAddress);
         IMutytesLegacyProvider.TokenData memory token;

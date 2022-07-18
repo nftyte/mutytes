@@ -3,6 +3,9 @@ pragma solidity ^0.8.0;
 
 import { IERC721Receiver } from "../IERC721Receiver.sol";
 
+/**
+ * @title ERC721 token receiver utilities
+ */
 library ERC721ReceiverUtils {
     error UnexpectedNonERC721Receiver(address receiver);
 

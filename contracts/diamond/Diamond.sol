@@ -6,4 +6,7 @@ import { DiamondController } from "./DiamondController.sol";
 import { DiamondReadable } from "./readable/DiamondReadable.sol";
 import { DiamondWritable } from "./writable/DiamondWritable.sol";
 
+/**
+ * @title Diamond read and write operations implementation
+ */
 contract Diamond is IDiamond, DiamondReadable, DiamondWritable, DiamondController {}

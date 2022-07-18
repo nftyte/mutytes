@@ -7,6 +7,9 @@ import { ERC721TokenURIController } from "../../core/token/ERC721/tokenURI/ERC72
 import { ERC721SupplyController } from "../../core/token/ERC721/supply/ERC721SupplyController.sol";
 import { ProxyFacetedController } from "../../core/proxy/faceted/ProxyFacetedController.sol";
 
+/**
+ * @title Mutytes initialization facet
+ */
 contract MutytesInitFacet is
     ERC165Controller,
     OwnableController,
@@ -14,6 +17,13 @@ contract MutytesInitFacet is
     ERC721SupplyController,
     ProxyFacetedController
 {
+    /**
+     * @notice Set upgradable functions and supported interfaces
+     * @param selectors The upgradable function selectors
+     * @param isUpgradable Whether the functions should be upgradable
+     * @param interfaceIds The interface ids
+     * @param isSupported Whether the interfaces should be supported
+     */
     function setFunctionsAndInterfaces(
         bytes4[] calldata selectors,
         bool isUpgradable,
@@ -24,6 +34,11 @@ contract MutytesInitFacet is
         _setSupportedInterfaces(interfaceIds, isSupported);
     }
 
+    /**
+     * @notice Set upgradable functions
+     * @param selectors The upgradable function selectors
+     * @param isUpgradable Whether the functions should be upgradable
+     */
     function setUpgradableFunctions(bytes4[] calldata selectors, bool isUpgradable)
         external
         virtual
@@ -32,6 +47,11 @@ contract MutytesInitFacet is
         setUpgradableFunctions_(selectors, isUpgradable);
     }
 
+    /**
+     * @notice Set supported interfaces
+     * @param interfaceIds The interface ids
+     * @param isSupported Whether the interfaces should be supported
+     */
     function setSupportedInterfaces(bytes4[] calldata interfaceIds, bool isSupported)
         external
         virtual
@@ -40,6 +60,12 @@ contract MutytesInitFacet is
         _setSupportedInterfaces(interfaceIds, isSupported);
     }
 
+    /**
+     * @notice Initialize the default token URI provider
+     * @param id The URI provider id
+     * @param provider The URI provider address
+     * @param isProxyable Whether to proxy the URI provider
+     */
     function initTokenURI(
         uint256 id,
         address provider,
@@ -48,6 +74,10 @@ contract MutytesInitFacet is
         ERC721TokenURI_(id, provider, isProxyable);
     }
 
+    /**
+     * @notice Initialize the token supply
+     * @param supply The initial supply amount
+     */
     function initSupply(uint256 supply) external virtual onlyOwner {
         ERC721Supply_(supply);
     }

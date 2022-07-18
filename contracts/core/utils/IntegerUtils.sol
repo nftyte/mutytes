@@ -1,6 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+/**
+ * @title Integer utilities
+ */
 library IntegerUtils {
     error UnexpectedZeroValue();
     error UnexpectedNonZeroValue();

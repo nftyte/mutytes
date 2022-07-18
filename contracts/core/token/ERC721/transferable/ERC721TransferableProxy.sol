@@ -5,11 +5,18 @@ import { IERC721Transferable } from "./IERC721Transferable.sol";
 import { ERC721TransferableController } from "./ERC721TransferableController.sol";
 import { ProxyUpgradableController } from "../../../proxy/upgradable/ProxyUpgradableController.sol";
 
+/**
+ * @title ERC721 token transfers implementation
+ * @dev Note: Upgradable implementation
+ */
 abstract contract ERC721TransferableProxy is
     IERC721Transferable,
     ERC721TransferableController,
     ProxyUpgradableController
 {
+    /**
+     * @inheritdoc IERC721Transferable
+     */
     function safeTransferFrom(
         address from,
         address to,
@@ -19,6 +26,9 @@ abstract contract ERC721TransferableProxy is
         safeTransferFrom_(from, to, tokenId, data);
     }
 
+    /**
+     * @inheritdoc IERC721Transferable
+     */
     function safeTransferFrom(
         address from,
         address to,
@@ -27,6 +37,9 @@ abstract contract ERC721TransferableProxy is
         safeTransferFrom_(from, to, tokenId, "");
     }
 
+    /**
+     * @inheritdoc IERC721Transferable
+     */
     function transferFrom(
         address from,
         address to,
