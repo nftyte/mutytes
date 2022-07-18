@@ -11,8 +11,9 @@ module.exports = {
     //     },
     // },
     solidity: {
-        version: "0.8.13",
+        version: "0.8.15",
         settings: {
+            viaIR: true,
             optimizer: {
                 enabled: true,
                 runs: 200,
