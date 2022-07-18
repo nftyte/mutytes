@@ -7,7 +7,7 @@ import { ERC721InventoryUtils } from "../utils/ERC721InventoryUtils.sol";
 abstract contract ERC721MintableModel {
     using ERC721InventoryUtils for uint256;
 
-    function _maxMintBalance() internal pure virtual returns (uint256) {
+    function _maxMintBalance() internal view virtual returns (uint256) {
         return ERC721InventoryUtils.SLOTS_PER_INVENTORY;
     }
 
