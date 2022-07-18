@@ -20,6 +20,13 @@ interface IMutytesLegacyProvider {
         uint256 count;
     }
 
+    /**
+     * @notice Get the URI of a token
+     * @param token The token data
+     * @param mutation The mutation data
+     * @param externalURL External token URL
+     * @return tokenURI The token URI
+     */
     function tokenURI(
         TokenData calldata token,
         MutationData calldata mutation,
