@@ -15,7 +15,7 @@ let mutytes, owner, accs, availableSupply;
 
 const initialSupply = 1000;
 
-describe.only("ERC721Transferable Test", async () => {
+describe("ERC721Transferable Test", async () => {
     before(async () => {
         [owner, ...accs] = await ethers.getSigners();
         const mutytesProxy = await deploy();
