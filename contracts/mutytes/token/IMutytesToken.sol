@@ -24,4 +24,11 @@ interface IMutytesToken is
      * @return supply The available supply amount
      */
     function availableSupply() external returns (uint256);
+
+    /**
+     * @notice Get the amount of tokens minted by an owner
+     * @param owner The owner's address
+     * @return balance The balance amount
+     */
+    function mintBalanceOf(address owner) external returns (uint256);
 }

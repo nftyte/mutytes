@@ -31,6 +31,13 @@ contract MutytesToken is
         return _availableSupply();
     }
 
+    /**
+     * @inheritdoc IMutytesToken
+     */
+    function mintBalanceOf(address owner) external view virtual returns (uint256) {
+        return mintBalanceOf_(owner);
+    }
+
     function _burn_(address owner, uint256 tokenId)
         internal
         virtual

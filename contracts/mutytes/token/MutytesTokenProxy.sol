@@ -32,6 +32,13 @@ abstract contract MutytesTokenProxy is
         return _availableSupply();
     }
 
+    /**
+     * @inheritdoc IMutytesToken
+     */
+    function mintBalanceOf(address owner) external virtual upgradable returns (uint256) {
+        return mintBalanceOf_(owner);
+    }
+
     function _burn_(address owner, uint256 tokenId)
         internal
         virtual
