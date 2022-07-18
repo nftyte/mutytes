@@ -71,6 +71,6 @@ describe("ERC721Mintable Test", async () => {
     it("shouldn't mint if tx value > 0", async () => {
         await expect(
             mutytes.mint(1, { value: ethers.utils.parseEther((0.1).toFixed(2)) })
-        ).to.be.revertedWith("NonZero");
+        ).to.be.revertedWith("UnexpectedValue");
     });
 });

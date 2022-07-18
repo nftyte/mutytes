@@ -44,13 +44,18 @@ abstract contract ERC721MintableController is
         _updateAvailableSupply(amount);
     }
 
-    function _enforceCanMint(uint256 amount) internal view virtual {
-        amount.enforceIsNotZero();
-        amount.enforceNotGreaterThan(_availableSupply());
-        (_mintBalanceOf(msg.sender) + amount).enforceNotGreaterThan(_maxMintBalance());
+    function _mintValue() internal view virtual returns (uint256) {
+        return 0 ether;
     }
 
     function _mintedSupply() internal view virtual returns (uint256) {
         return _initialSupply() - _availableSupply();
+    }
+
+    function _enforceCanMint(uint256 amount) internal view virtual {
+        amount.enforceIsNotZero();
+        amount.enforceNotGreaterThan(_availableSupply());
+        msg.value.enforceEquals(amount * _mintValue());
+        (_mintBalanceOf(msg.sender) + amount).enforceNotGreaterThan(_maxMintBalance());
     }
 }
