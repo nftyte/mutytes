@@ -21,7 +21,7 @@ contract MutytesDiamondFacet is Diamond {
         diamondCut_(facetCuts, address(0), "");
     }
 
-    function _selectors() internal view virtual returns (bytes4[] memory selectors) {
+    function _selectors() internal pure virtual returns (bytes4[] memory selectors) {
         bytes memory selectorsPtr = SELECTORS_BYTECODE;
         assembly {
             selectors := add(selectorsPtr, 0x20)
