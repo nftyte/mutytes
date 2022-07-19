@@ -38,7 +38,7 @@ contract MutytesDiamondFacet is Diamond, ERC165Controller {
         virtual
         returns (bytes4[] memory selectors)
     {
-        return _ptrToBytes4(DIAMOND_SELECTORS);
+        return _ptrToBytes4Array(DIAMOND_SELECTORS);
     }
 
     function _erc165Selectors()
@@ -47,17 +47,16 @@ contract MutytesDiamondFacet is Diamond, ERC165Controller {
         virtual
         returns (bytes4[] memory selectors)
     {
-        return _ptrToBytes4(ERC165_SELECTORS);
+        return _ptrToBytes4Array(ERC165_SELECTORS);
     }
 
     function _supportedInterfaces() internal pure virtual returns (bytes4[] memory) {
-        return _ptrToBytes4(SUPPORTED_INTERFACES);
+        return _ptrToBytes4Array(SUPPORTED_INTERFACES);
     }
 
-    function _ptrToBytes4(bytes memory ptr)
-        internal
+    function _ptrToBytes4Array(bytes memory ptr)
+        private
         pure
-        virtual
         returns (bytes4[] memory selectors)
     {
         assembly {
