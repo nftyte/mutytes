@@ -5,7 +5,8 @@ pragma solidity ^0.8.0;
 import { ERC165Controller } from "../../core/introspection/ERC165Controller.sol";
 import { OwnableController } from "../../core/access/ownable/OwnableController.sol";
 import { ERC721TokenURIController } from "../../core/token/ERC721/tokenURI/ERC721TokenURIController.sol";
-import { ERC721SupplyController } from "../../core/token/ERC721/supply/ERC721SupplyController.sol";
+import { ERC721EnumerableController } from "../../core/token/ERC721/enumerable/ERC721EnumerableController.sol";
+import { PageInfo } from "../../core/token/ERC721/enumerable/ERC721EnumerableModel.sol";
 import { ProxyFacetedController } from "../../core/proxy/faceted/ProxyFacetedController.sol";
 
 /**
@@ -15,7 +16,7 @@ contract MutytesInitFacet is
     ERC165Controller,
     OwnableController,
     ERC721TokenURIController,
-    ERC721SupplyController,
+    ERC721EnumerableController,
     ProxyFacetedController
 {
     /**
@@ -81,5 +82,13 @@ contract MutytesInitFacet is
      */
     function initSupply(uint256 supply) external virtual onlyOwner {
         ERC721Supply_(supply);
+    }
+
+    /**
+     * @notice Initialize enumerable extension
+     * @param pages The enumerable token pages
+     */
+    function initEnumerable(PageInfo[] calldata pages) external virtual onlyOwner {
+        _ERC721Enumerable(pages);
     }
 }

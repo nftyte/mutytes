@@ -6,6 +6,10 @@ import { IERC721EnumerablePage } from "./IERC721EnumerablePage.sol";
 import { erc721EnumerableStorage, ERC721EnumerableStorage, PageInfo } from "./ERC721EnumerableStorage.sol";
 
 abstract contract ERC721EnumerableModel {
+    function _ERC721Enumerable(PageInfo[] memory pages) internal virtual {
+        erc721EnumerableStorage().pages = pages;
+    }
+
     function _tokenByIndex(uint256 index)
         internal
         view
