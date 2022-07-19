@@ -28,13 +28,14 @@ async function deploy(verbose = false) {
     const initFacet = await deployable("MutytesInitFacet").at(mutytes.address);
     const mutytesSelectors = selectorCollection(mutytes).removeFunctions(
         "tokenByIndex(uint256)",
-        "tokenOfOwnerByIndex(address,uint256)"
-    ).selectors;
+        "tokenOfOwnerByIndex(address,uint256)",
+        "supportsInterface(bytes4)"
+    );
     const cuts = [
         {
             facetAddress: mutytes.address,
             action: FacetCutAction.Add,
-            functionSelectors: mutytesSelectors,
+            functionSelectors: mutytesSelectors.selectors,
         },
         {
             facetAddress: diamond.address,
@@ -56,7 +57,12 @@ async function deploy(verbose = false) {
     );
     const setFunctionsAndInterfacesCall = init.interface.encodeFunctionData(
         "setFunctionsAndInterfaces(bytes4[],bool,bytes4[],bool)",
-        [mutytesSelectors, true, supportedInterfaces, true]
+        [
+            mutytesSelectors.addFunctions("supportsInterface(bytes4)").selectors,
+            true,
+            supportedInterfaces,
+            true,
+        ]
     );
 
     await diamondFacet.diamondCut(cuts, init.address, setFunctionsAndInterfacesCall, {

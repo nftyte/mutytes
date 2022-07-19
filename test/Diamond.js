@@ -46,7 +46,7 @@ describe("Diamond Test", async () => {
             },
         ]) {
             const selectors = await diamondFacet.facetFunctionSelectors(facet.address);
-            assert.deepEqual(selectors, facet.interface.selectors);
+            assert.sameMembers(selectors, facet.interface.selectors);
 
             for (let selector of facet.interface.selectors) {
                 assert.equal(await diamondFacet.facetAddress(selector), facet.address);

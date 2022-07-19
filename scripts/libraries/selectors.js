@@ -11,12 +11,11 @@ function SelectorCollection(src = null) {
                 ])
             );
         } else if (src.constructor == [].constructor) {
-            const abiInterface = new ethers.utils.Interface(src);
+            const abiInterface = new ethers.utils.Interface(
+                src.map((func) => `function ${func}`)
+            );
             this.selectorMap = Object.fromEntries(
-                src.map((func) => [
-                    func,
-                    abiInterface.getSighash(ethers.utils.Fragment.from(func)),
-                ])
+                src.map((func) => [func, abiInterface.getSighash(func)])
             );
         }
     }
@@ -47,6 +46,19 @@ Object.defineProperty(SelectorCollection.prototype, "interfaceId", {
 });
 
 Object.assign(SelectorCollection.prototype, {
+    addFunctions(...functions) {
+        const abiInterface = new ethers.utils.Interface(
+            functions.map((func) => `function ${func}`)
+        );
+        this.selectorMap = {
+            ...this.selectorMap,
+            ...Object.fromEntries(
+                functions.map((func) => [func, abiInterface.getSighash(func)])
+            ),
+        };
+
+        return this;
+    },
     removeSelectors(...selectors) {
         const functions = [];
 
