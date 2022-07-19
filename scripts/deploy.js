@@ -51,7 +51,7 @@ async function deploy(verbose = false) {
         },
     ];
     const supportedInterfaces = await Promise.all(
-        ["ERC165", "Ownable", "ERC721", "ERC721Metadata", "DiamondReadable"].map(
+        ["Ownable", "ERC721Metadata", "DiamondReadable"].map(
             async (c) => selectorCollection(await deployable(c).contract()).interfaceId
         )
     );
