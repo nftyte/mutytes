@@ -4,10 +4,13 @@ pragma solidity ^0.8.0;
 
 import { ERC165Controller } from "../../core/introspection/ERC165Controller.sol";
 import { OwnableController } from "../../core/access/ownable/OwnableController.sol";
+import { ERC721MintableController } from "../../core/token/ERC721/mintable/ERC721MintableController.sol";
 import { ERC721TokenURIController } from "../../core/token/ERC721/tokenURI/ERC721TokenURIController.sol";
 import { ERC721EnumerableController } from "../../core/token/ERC721/enumerable/ERC721EnumerableController.sol";
+import { ERC721MintableController } from "../../core/token/ERC721/mintable/ERC721MintableController.sol";
 import { PageInfo } from "../../core/token/ERC721/enumerable/ERC721EnumerableModel.sol";
 import { ProxyFacetedController } from "../../core/proxy/faceted/ProxyFacetedController.sol";
+import { IntegerUtils } from "../../core/utils/IntegerUtils.sol";
 
 /**
  * @title Mutytes initialization facet
@@ -15,10 +18,13 @@ import { ProxyFacetedController } from "../../core/proxy/faceted/ProxyFacetedCon
 contract MutytesInitFacet is
     ERC165Controller,
     OwnableController,
+    ERC721MintableController,
     ERC721TokenURIController,
     ERC721EnumerableController,
     ProxyFacetedController
 {
+    using IntegerUtils for uint256;
+
     /**
      * @notice Set upgradable functions and supported interfaces
      * @param selectors The upgradable function selectors
@@ -74,6 +80,27 @@ contract MutytesInitFacet is
         bool isProxyable
     ) external virtual onlyOwner {
         ERC721TokenURI_(id, provider, isProxyable);
+    }
+
+    /**
+     * @notice Initialize the token supply and mint reserved tokens
+     * @param supply The initial supply amount
+     * @param reserved The reserved supply amount
+     */
+    function initSupplyAndMintReserved(uint256 supply, uint256 reserved)
+        external
+        virtual
+        onlyOwner
+    {
+        reserved.enforceNotGreaterThan(supply);
+        ERC721Supply_(supply);
+        (uint256 tokenId, uint256 maxTokenId) = _mint_(msg.sender, reserved);
+
+        unchecked {
+            while (tokenId < maxTokenId) {
+                emit Transfer(address(0), msg.sender, tokenId++);
+            }
+        }
     }
 
     /**
