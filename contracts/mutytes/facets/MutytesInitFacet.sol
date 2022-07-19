@@ -87,28 +87,19 @@ contract MutytesInitFacet is
      * @param supply The initial supply amount
      * @param reserved The reserved supply amount
      */
-    function initSupplyAndMintReserved(uint256 supply, uint256 reserved)
-        external
-        virtual
-        onlyOwner
-    {
+    function initSupply(uint256 supply, uint256 reserved) external virtual onlyOwner {
         reserved.enforceNotGreaterThan(supply);
         ERC721Supply_(supply);
-        (uint256 tokenId, uint256 maxTokenId) = _mint_(msg.sender, reserved);
 
-        unchecked {
-            while (tokenId < maxTokenId) {
-                emit Transfer(address(0), msg.sender, tokenId++);
+        if (reserved > 0) {
+            (uint256 tokenId, uint256 maxTokenId) = _mint_(msg.sender, reserved);
+
+            unchecked {
+                while (tokenId < maxTokenId) {
+                    emit Transfer(address(0), msg.sender, tokenId++);
+                }
             }
         }
-    }
-
-    /**
-     * @notice Initialize the token supply
-     * @param supply The initial supply amount
-     */
-    function initSupply(uint256 supply) external virtual onlyOwner {
-        ERC721Supply_(supply);
     }
 
     /**
