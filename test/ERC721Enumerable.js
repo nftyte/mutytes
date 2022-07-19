@@ -7,7 +7,7 @@ const {
 const { deploy } = require("../scripts/deploy");
 const { deployable } = require("../scripts/libraries/deployable");
 
-const { assert } = require("chai");
+const { assert, expect } = require("chai");
 const { selectorCollection } = require("../scripts/libraries/selectors");
 const { FacetCutAction } = require("../scripts/libraries/diamond");
 
@@ -21,7 +21,7 @@ let mutytes,
 
 const initialSupply = 1000;
 
-describe.only("ERC721Enumerable Test", async () => {
+describe("ERC721Enumerable Test", async () => {
     before(async () => {
         [owner, ...accs] = await ethers.getSigners();
         const mutytesProxy = await deploy();
@@ -141,6 +141,20 @@ describe.only("ERC721Enumerable Test", async () => {
                     tid.toString()
                 );
             }
+        }
+    });
+
+    it("shouldn't query global index > supply", async () => {
+        await expect(mutytes.tokenByIndex(tokens.length)).to.be.revertedWith(
+            "OutOfBounds"
+        );
+    });
+
+    it("shouldn't query owner index > balance", async () => {
+        for (let acc of [owner, accs[0], accs[1]]) {
+            await expect(
+                mutytes.tokenOfOwnerByIndex(acc.address, tokensOf(acc).length)
+            ).to.be.revertedWith("OutOfBounds");
         }
     });
 });
