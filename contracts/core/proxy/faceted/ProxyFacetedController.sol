@@ -149,7 +149,6 @@ abstract contract ProxyFacetedController is ProxyFacetedModel, ProxyController {
         implementation.enforceIsNotZeroAddress();
 
         if (!_isUpgradable(selector)) {
-            // Can't remove immutable functions - functions defined directly in the proxy w/o upgradability
             implementation.enforceNotEquals(address(this));
         }
     }

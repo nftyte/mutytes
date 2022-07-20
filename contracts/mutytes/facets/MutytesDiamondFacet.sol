@@ -17,7 +17,7 @@ bytes constant SUPPORTED_INTERFACES = abi.encode(
 );
 
 /**
- * @title Mutytes diamond implementation facet
+ * @title Mutytes diamond facet
  */
 contract MutytesDiamondFacet is Diamond, ERC165Controller {
     /**
