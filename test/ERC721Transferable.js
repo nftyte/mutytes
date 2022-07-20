@@ -23,7 +23,7 @@ describe("ERC721Transferable Test", async () => {
         const initFacet = await deployable("MutytesInitFacet").at(mutytes.address);
         initBalances([owner, ...accs]);
         mutytes.on("Transfer", onTransfer);
-        await initFacet.initSupply(initialSupply);
+        await initFacet.initSupply(initialSupply, 0);
         await mutytes.mint(10);
         await onUpdateBalanceOf(owner, 10);
         await mutytes.connect(accs[0]).mint(10);

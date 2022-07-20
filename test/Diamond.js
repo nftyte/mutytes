@@ -71,7 +71,7 @@ describe("Diamond Test", async () => {
     it("should add some functions", async () => {
         await addFunctions(mutytes.address, mutytesInterface.selectors);
         assert.equal((await diamondFacet.facetAddresses()).length, 3);
-        await initFacet.initSupply(100);
+        await initFacet.initSupply(100, 0);
         await initFacet.setUpgradableFunctions(mutytesInterface.selectors, true);
         assert.equal(await mutytes.availableSupply(), 100);
     });

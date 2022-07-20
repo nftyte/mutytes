@@ -30,7 +30,7 @@ describe("ERC721Enumerable Test", async () => {
         diamondFacet = await deployable("MutytesDiamondFacet").at(mutytes.address);
         initBalances([owner, ...accs]);
         mutytes.on("Transfer", onTransfer);
-        await initFacet.initSupply(initialSupply);
+        await initFacet.initSupply(initialSupply, 0);
         availableSupply = initialSupply;
 
         for (let mint of [

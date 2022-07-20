@@ -22,7 +22,7 @@ describe("ERC721Burnable Test", async () => {
         const initFacet = await deployable("MutytesInitFacet").at(mutytes.address);
         initBalances([owner, ...accs]);
         mutytes.on("Transfer", onTransfer);
-        await initFacet.initSupply(initialSupply);
+        await initFacet.initSupply(initialSupply, 0);
         await mutytes.mint(4);
         await onUpdateBalanceOf(owner, 4);
         availableSupply = initialSupply - 4;

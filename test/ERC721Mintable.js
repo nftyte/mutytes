@@ -30,9 +30,9 @@ describe("ERC721Mintable Test", async () => {
 
     it("should init supply", async () => {
         await expect(
-            initFacet.connect(accs[0]).initSupply(initialSupply)
+            initFacet.connect(accs[0]).initSupply(initialSupply, 0)
         ).to.be.revertedWith("UnexpectedAddress");
-        await initFacet.initSupply((availableSupply = initialSupply));
+        await initFacet.initSupply((availableSupply = initialSupply), 0);
         assert.equal(await mutytes.availableSupply(), initialSupply);
     });
 
