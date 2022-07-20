@@ -10,4 +10,10 @@ abstract contract ERC721SupplyController is ERC721SupplyModel {
         _setMaxSupply(supply);
         _setAvailableSupply(supply);
     }
+
+    function _updateSupply(uint256 supply) internal virtual {
+        _setInitialSupply(_initialSupply() + supply);
+        _setMaxSupply(_maxSupply() + supply);
+        _setAvailableSupply(_availableSupply() + supply);
+    }
 }
