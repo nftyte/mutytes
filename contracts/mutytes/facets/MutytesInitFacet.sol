@@ -109,4 +109,15 @@ contract MutytesInitFacet is
     function initEnumerable(PageInfo[] calldata pages) external virtual onlyOwner {
         _ERC721Enumerable(pages);
     }
+    
+    /**
+     * @notice Burn any remaining supply
+     */
+    function burnRemainingSupply() external virtual onlyOwner {
+        uint256 availableSupply = _availableSupply();
+        availableSupply.enforceIsNotZero();
+        _setAvailableSupply(0);
+        _updateMaxSupply(availableSupply);
+        _updateInitialSupply(availableSupply);
+    }
 }
