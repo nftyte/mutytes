@@ -3,11 +3,11 @@ const { FacetCutAction } = require("./libraries/diamond");
 const { selectorCollection } = require("./libraries/selectors");
 
 async function deploy(verbose = false) {
-    const interpreter = await deployInterpreter();
-    if (verbose) console.log("MutyteInterpreter deployed:", interpreter.address);
+    // const interpreter = await deployInterpreter();
+    // if (verbose) console.log("MutyteInterpreter deployed:", interpreter.address);
 
     const legacyAdapter = await deployable("MutytesLegacyProvider").deploy(
-        interpreter.address,
+        ethers.constants.AddressZero, // interpreter.address,
         "https://www.mutytes.com/mutyte/"
     );
     if (verbose) console.log("MutytesLegacyProvider deployed:", legacyAdapter.address);
@@ -72,6 +72,9 @@ async function deploy(verbose = false) {
 
     await initFacet.initTokenURI(0, legacyAdapter.address, false, { gasLimit: 100000 });
     if (verbose) console.log("Initialized token URI");
+
+    // await initFacet.initSupply(1721, 172, { gasLimit: 500000 });
+    // if (verbose) console.log("Initialized supply");
 
     return mutytes;
 }
