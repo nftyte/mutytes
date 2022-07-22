@@ -27,6 +27,8 @@ This repo includes a custom implementation of the [EIP-2535 Diamonds](https://ei
 npx hardhat run scripts/deploy.js
 ```
 
+**Note:** This repo doesn't include the on-chain renderer contract.
+
 ## Tests
 
 ```console
