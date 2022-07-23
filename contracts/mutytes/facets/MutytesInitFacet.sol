@@ -4,7 +4,6 @@ pragma solidity ^0.8.0;
 
 import { ERC165Controller } from "../../core/introspection/ERC165Controller.sol";
 import { OwnableController } from "../../core/access/ownable/OwnableController.sol";
-import { ERC721MintableController } from "../../core/token/ERC721/mintable/ERC721MintableController.sol";
 import { ERC721TokenURIController } from "../../core/token/ERC721/tokenURI/ERC721TokenURIController.sol";
 import { ERC721EnumerableController } from "../../core/token/ERC721/enumerable/ERC721EnumerableController.sol";
 import { ERC721MintableController } from "../../core/token/ERC721/mintable/ERC721MintableController.sol";
